@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-11-11T12:00:00Z",
+  "stockCeiling": 0,
+  "assets": {
+    "brand-logo": {
+      "src": "/assets/logo.svg",
+      "width": 160,
+      "height": 56,
+      "aspectRatio": "2.86:1",
+      "format": "svg"
+    },
+    "brand-logo-mark": {
+      "src": "/assets/logo-mark.svg",
+      "width": 48,
+      "height": 48,
+      "aspectRatio": "1:1",
+      "format": "svg"
+    },
+    "blog-playbook": {
+      "src": "/assets/blog/the-white-label-playbook-for-marketing-agencies.svg",
+      "width": 1200,
+      "height": 630,
+      "aspectRatio": "1.9:1",
+      "format": "svg"
+    },
+    "blog-scoping": {
+      "src": "/assets/blog/how-to-scope-fixed-price-web-projects-without-scope-creep.svg",
+      "width": 1200,
+      "height": 630,
+      "aspectRatio": "1.9:1",
+      "format": "svg"
+    },
+    "blog-headless": {
+      "src": "/assets/blog/headless-nextjs-vs-wordpress-vs-webflow.svg",
+      "width": 1200,
+      "height": 630,
+      "aspectRatio": "1.9:1",
+      "format": "svg"
+    }
+  }
+}

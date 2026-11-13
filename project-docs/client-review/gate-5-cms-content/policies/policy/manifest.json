@@ -1,0 +1,22 @@
+{
+  "model": "policy",
+  "lastSyncedAt": "2026-11-11T12:08:06.060Z",
+  "items": {
+    "privacy": {
+      "id": "6af45aa3a8450a8c5b764753",
+      "slug": "privacy",
+      "status": "synced",
+      "pushedAt": "2026-11-11T12:08:05.038Z",
+      "attempts": 1,
+      "endpoint": "https://prod-server.nextwebworks.in/api/website-privacy-policy/create-one"
+    },
+    "terms": {
+      "id": "6af45aa4a8450a8c5b764755",
+      "slug": "terms",
+      "status": "synced",
+      "pushedAt": "2026-11-11T12:08:06.060Z",
+      "attempts": 1,
+      "endpoint": "https://prod-server.nextwebworks.in/api/website-privacy-policy/create-one"
+    }
+  }
+}

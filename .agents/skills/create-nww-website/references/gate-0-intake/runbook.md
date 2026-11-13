@@ -1,0 +1,255 @@
+# Stage 0: Intake Check & Project Brief Runbook
+
+## Table of Contents
+- [Overview & Role in Pipeline](#overview--role-in-pipeline)
+- [Technical Project Name & Vercel Slug Propagation](#technical-project-name--vercel-slug-propagation)
+- [Pre-Gate 1 Legacy Website Archiving & Asset Salvage](#pre-gate-1-legacy-website-archiving--asset-salvage)
+  - [Git Hygiene: Adding `previous-site/` to `.gitignore`](#git-hygiene-adding-previous-site-to-gitignore)
+- [Pre-Gate 2 Mandatory Reference Website Crawling & Context Ingestion](#pre-gate-2-mandatory-reference-website-crawling--context-ingestion)
+- [Asset Harvesting & Generation System (Batch 04)](#asset-harvesting--generation-system-batch-04)
+- [Questionnaire & Client Discovery Batches](#questionnaire--client-discovery-batches)
+- [Environment & CMS Mode Configuration](#environment--cms-mode-configuration)
+- [Deliverables Checklist for Gate 0](#deliverables-checklist-for-gate-0)
+- [Gate 0 Approval & Takeoff Protocol](#gate-0-approval--takeoff-protocol)
+- [Continuous Discovery Loop Across Downstream Stages & Live Code](#continuous-discovery-loop-across-downstream-stages--live-code)
+- [References](#references)
+
+## Overview & Role in Pipeline
+
+Stage 0 is the foundation of the 9-stage human-gated website development lifecycle. In this stage, the agent ingests client requirements across multiple sources (brief notes, legacy crawl, uploaded assets, and interactive turns), establishes project scope, confirms the **Technical Project Name / Vercel Slug**, executes a comprehensive visual asset audit and harvesting pipeline, configures the environment contract (`.env.example`), and drafts the foundational project brief before proceeding to technical architecture in Stage 1.
+
+> **New Chat / Fresh Session Rule (Hard Pull Latest Skills):**  
+> If starting in a **new chat session**, always hard pull the latest skills to ensure the agent operates with the newest gate runbooks, crawl limit options, and companion scripts:
+> ```bash
+> DISABLE_TELEMETRY=1 npx skills update create-nww-website -y
+> # Or hard re-fetch directly from GitHub:
+> DISABLE_TELEMETRY=1 npx skills add nextwebworks/skills --skill create-nww-website -y
+> ```
+> **Do Not Edit Skill Files:** Skill files are immutable runbooks. Never edit skill files directly; instead, request changes with a prompt.
+
+```mermaid
+graph TD
+    A[Client Inputs: Brief / Crawl / Assets / Turns] --> B[Intake Questionnaire & Confirmation Checkpoints]
+    B --> C{Legacy Site Migration?}
+    C -- Yes --> D[Pre-Gate 1 Legacy Crawl: site-fetch & Asset Audit]
+    C -- No --> E[Environment & CMS Mode Setup]
+    D --> E
+    E --> F[Asset Harvesting & Per-Entity Inventory: asset-manifest.md]
+    F --> R{Reference Sites Provided?}
+    R -- Yes --> S[Mandatory Pre-Gate 2 Crawl: site-fetch to project-docs/design-references/]
+    R -- No --> G[Persist client-context/answers/batch-*/answers.md]
+    S --> G
+    G --> H[Gate 0 Sign-Off: Modular Batch Answers, Asset Manifest & Mode Approval]
+    H --> I[Stage 1: Tech Stack Specification]
+```
+
+---
+
+## Technical Project Name & Vercel Slug Propagation
+
+> **Read Directory Name First:** Always inspect `path.basename(process.cwd())` to establish the technical slug and derive the default brand name in Title Case. Never inject or assume unrelated external projects (such as "Minit Charger").
+
+In Batch 01, the agent confirms the **Technical Project Name / Slug** (defaults to current working directory name, e.g. `<current-directory-slug>`, or custom slug like `lumina-portfolio`, `apex-saas`). This identifier must be used consistently:
+1. **Gate 2 Variations:** Every design variation directory and review portal must use this slug (e.g. `project-docs/client-review/gate-2-design-theory/<project-slug>-v1/index.html`).
+2. **Next.js Package Name:** Stored as `"name": "<project-slug>"` in `site/package.json`.
+3. **Vercel Project Setup:** Used when creating or linking the Vercel project (`vercel link --project <project-slug>`) for public preview and staging reviews. Localhost forwarding is strictly forbidden.
+
+---
+
+## Pre-Gate 1 Legacy Website Archiving & Asset Salvage
+
+If the project involves redesigning, replacing, or migrating an existing website, the legacy site **MUST** be archived and cataloged **before Gate 1**. This ensures URL structures, metadata, copy, and existing page layouts are preserved for 301 redirect mapping (Stage 4) and content migration (Stage 5).
+
+Execute the companion `site-fetch` utility with the appropriate limit mode:
+```bash
+# 1. Max 15 pages [at least one per page type] (Default):
+node skills/create-nww-website/scripts/site-fetch/index.js --url "https://example.com" --out previous-site --limit-mode max-sampled --max-pages 15
+
+# 2. No limits (crawls all discovered pages):
+node skills/create-nww-website/scripts/site-fetch/index.js --url "https://example.com" --out previous-site --limit-mode no-limits
+
+# 3. Max 15 pages [any pages in discovery order]:
+node skills/create-nww-website/scripts/site-fetch/index.js --url "https://example.com" --out previous-site --limit-mode max-any --max-pages 15
+
+# 4. Only homepage:
+node skills/create-nww-website/scripts/site-fetch/index.js --url "https://example.com" --out previous-site --limit-mode homepage
+
+# 5. Selected pages only:
+node skills/create-nww-website/scripts/site-fetch/index.js --url "https://example.com" --out previous-site --limit-mode selected --pages "/,/about,/services,/pricing"
+```
+
+The crawler captures a full working offline mirror in `previous-site/`:
+- `index.html`: Fully functional offline homepage (works as it is when opened directly in a browser).
+- `sitemap.xml`: Complete legacy route XML sitemap.
+- `manifest.json`: Full page catalog, legacy routes, and harvested asset inventory with dimensions and quality status.
+- `<path>/index.html`: Per-page functional offline markup.
+- `<path>/content.md`: Clean, readability-extracted Markdown content.
+- `<path>/screenshot.png`: High-resolution full-page visual capture.
+- `<source-path>/...`: All visual and downloadable assets placed directly where they were in the sources.
+
+> **Chrome Offline Preview:** The mirrored HTML includes preloader suppression, CORS hardening, and error guards for direct `file://` double-clicking in Chrome. If local browser extensions or security policies interfere, run the built-in local preview server:
+> `node skills/create-nww-website/scripts/site-fetch/index.js --serve previous-site`
+>
+> **Clean Start Guarantee:** If `previous-site/` already exists from a prior crawl, the crawler automatically deletes the existing folder before crawling to prevent stale files or obsolete assets from contaminating the new inventory.
+>
+> **Agentic Execution & Phase Reporting:** The AI agent executing `site-fetch` must proactively report back to the user upon the completion of each phase:
+> 1. **Phase 1 (Route Discovery):** Report total sitemap routes and internal navigation links found.
+> 2. **Phase 2 (Page Selection):** Report limit mode strategy and roster of selected pages.
+> 3. **Phase 3 (Page Capture):** Report captured pages count, asset slots detected, and network buffer status.
+> 4. **Phase 4 (Asset Harvesting):** Report unique assets placed, high-resolution media tally, and relativized CSS files.
+> 5. **Phase 5 (Offline Hardening):** Report offline HTML files written and active hardening safeguards.
+> 6. **Phase 6 (Catalog & Preview):** Report manifest generation and provide instant local preview server command/URL (`--serve`).
+
+### Git Hygiene: Adding `previous-site/` to `.gitignore`
+
+The crawled legacy mirror contains full HTML files, vendor scripts, stylesheets, and original media assets (often dozens to hundreds of megabytes). **Never commit `previous-site/` into git version control.**
+
+Add `previous-site/` to the project's root `.gitignore` file immediately after crawling:
+
+```gitignore
+# Legacy website offline mirror & harvested assets (local reference only)
+previous-site/
+```
+
+If the root `.gitignore` does not yet exist, create it and verify with `git status` that `previous-site/` is ignored before continuing to Gate 1.
+
+---
+
+## Pre-Gate 2 Mandatory Reference Website Crawling & Context Ingestion
+
+If the client or intake brief provides one or more reference website URLs (e.g. in the initial prompt or Batch 02 Q13a), running the companion `site-fetch` utility on every reference site is **MANDATORY** before advancing to Gate 2 (Design Theory).
+
+> [!IMPORTANT]
+> **Mandatory Gate 0 Context Invariant:** All reference website captures and analysis artifacts must be ingested into the Gate 0 context (`project-docs/design-references/` and `sources.md`) before moving to Gate 2. This step can be skipped **ONLY if zero reference websites were provided**.
+
+### Execution Command
+Execute `site-fetch` for each provided reference website URL:
+```bash
+node skills/create-nww-website/scripts/site-fetch/index.js \
+  --url "<reference-url>" \
+  --out "project-docs/design-references/<domain>" \
+  --limit-mode max-sampled \
+  --max-pages 15
+```
+
+The crawler captures representative page types into `project-docs/design-references/<domain>/`:
+- `index.html`: Fully rendered and hardened offline snapshot.
+- `content.md`: Clean, readability-extracted Markdown content.
+- `screenshot.png`: High-resolution full-page visual capture.
+- `manifest.json`: Route inventory and harvested asset catalog.
+
+### Reference Ledger Compilation (`sources.md`)
+Immediately compile `project-docs/design-references/sources.md` summarizing all captured reference sites, their key design patterns, and an explicit third-party usage notice (strictly for design principle analysis; zero copied markup or assets).
+
+---
+
+## Asset Harvesting & Generation System (Batch 04)
+
+Visual assets are audited and classified before design or technical architecture:
+1. **Legacy Asset Audit:** Catalog logos, product photos, project deliverables, and team headshots from `previous-site/`.
+2. **Reuse Permission & Resolution Check:** Client explicitly approves which legacy assets carry forward. Assets under 1200px desktop width are flagged for replacement.
+3. **Per-Entity Asset Intake:** Collect required high-resolution visual assets for **each** product, project/case study, service, and team member.
+4. **Stock & Generation Strategy:** Enforce stock image count ceiling (default: 20 images) and generate `client-context/asset-manifest.md`.
+
+---
+
+## Questionnaire & Client Discovery Batches
+
+Consult [client-questionnaire.md](client-questionnaire.md) for master orchestration. Present questions in 1-turn batches (5–7 questions per turn) using the modular guides:
+
+1. [Batch 01: Core Identity, Project Slug & Scope](batch-01-core-identity/questionnaire.md) (Q1a–Q8)
+2. [Batch 02: Branding, Design Direction & Motion Tier](batch-02-branding-motion/questionnaire.md) (Q9–Q15: `disabled`, `low`, `medium`, `high`, `max`, `ultra`)
+3. [Batch 03: Sitemap, Navigation & Verbatim Copywriting](batch-03-sitemap-copy/questionnaire.md) (Q16–Q21)
+4. [Batch 04: Asset Harvesting, Inventory & Generation System](batch-04-asset-harvesting-generation/questionnaire.md) (Q22a–Q24d)
+5. [Batch 05: Type-Specific Architectural Routing](batch-05-type-specific-routing/questionnaire.md) (E-commerce, Portfolio, SaaS, Booking, Blog, Corporate)
+6. [Batch 06: Legacy Website Migration & Content Carry-Forward](batch-06-legacy-site-migration/questionnaire.md) (Q26a–Q26e, if migration)
+7. [Batch 07: Technical SEO, Domain, Analytics & Governance](batch-07-seo-analytics-governance/questionnaire.md) (Q27–Q36)
+8. [Batch 08: Rolling Discovery & Refinement Open Questions](batch-08-open-questions/questionnaire.md) (Single batch of 20 active unanswered questions, on-demand client email)
+
+Store confirmed client responses in `client-context/answers/batch-[number]-[batch-name]/answers.md`, compiled assets in `client-context/asset-manifest.md`, and rolling open questions in `client-context/open-questions.md`.
+
+---
+
+## Environment & CMS Mode Configuration
+
+Generate `site/.env.example` reflecting the confirmed CMS mode:
+
+### Mode A: Markdown-Only (Zero External CMS)
+No CMS API keys required. All content is stored in local static Markdown files under `site/content/`.
+```env
+SITE_NAME="Brand Name"
+NEXT_PUBLIC_SITE_URL="https://example.com"
+```
+
+### Mode B: API-Headless (NWW CMS Integration)
+Requires tenant verification and API keys:
+```env
+SITE_NAME="Brand Name"
+SERVER_URL="https://prod-server.nextwebworks.com"
+CMS_TOKEN="your-cms-token"
+REVALIDATE_SECRET="your-revalidate-secret"
+NEXT_PUBLIC_SITE_URL="https://example.com"
+NEXT_PUBLIC_PREVIEW_GUARD="true"
+```
+
+---
+
+## Deliverables Checklist for Gate 0
+
+Before requesting Gate 0 approval, verify that all required assets exist:
+- [ ] `client-context/answers/batch-*/answers.md`: Documented answers to each intake batch with confirmed project slug.
+- [ ] `client-context/asset-manifest.md`: Audited inventory of legacy, per-entity, stock, and generated assets.
+- [ ] `client-context/open-questions.md`: Seeded with at least 20 targeted open questions for continuous client discovery.
+- [ ] `project-docs/client-brief.md`: Structured project brief synthesizing goals, target audience, and brand voice.
+- [ ] `project-docs/router-state.md`: Initialized stage tracker (`stage: 0`, `gate_0: pending`).
+- [ ] `previous-site/`: Crawled legacy site assets (if migration).
+- [ ] `project-docs/design-references/`: Crawled reference site offline mirrors, screenshots, and `sources.md` ledger (Mandatory if reference URLs provided; skippable only if none exist).
+- [ ] `.gitignore`: Contains `previous-site/` rule so legacy crawl files and media remain untracked.
+- [ ] `.env.example`: Configured environment variable contract in root and `site/`.
+
+---
+
+## Gate 0 Approval & Takeoff Protocol
+
+1. Present the project brief, asset manifest summary, selected CMS mode, and motion tier to the user/client.
+2. Initialize `client-context/open-questions.md` with at least 20 targeted, granular open questions spanning copywriting, assets, conversion, integrations, and technical domain requirements. **Strict Guardrail:** Do NOT include any confirmed decision, resolved answer, agreed parameter, or project recap in `client-context/open-questions.md`. Confirmed decisions belong strictly in `client-context/answers/batch-*/answers.md` and `project-docs/client-brief.md`.
+3. Halt execution and explicitly prompt:
+   > *"Stage 0 Intake is complete. Please review the confirmed batch answers (`client-context/answers/batch-*/answers.md`), asset manifest (`client-context/asset-manifest.md`), initial rolling open questions (`client-context/open-questions.md`), confirmed CMS mode, and motion tier. Respond with 'approved' to proceed to Stage 1 (Tech Stack). Run `/compact` to compact context before Stage 1."*
+4. Update `project-docs/router-state.md` upon explicit confirmation (`Gate 0: Intake Confirmed`). Remind the user to trigger `/compact` on this gate transaction.
+
+---
+
+## Continuous Discovery Loop Across Downstream Stages & Live Code
+
+Client discovery does not end at Gate 0:
+1. **Never Halts Pipeline Momentum:** The pipeline advances through Stages 1 to 9 without waiting for answers.
+2. **Minimum 20 Open Questions at Any Stage & Zero Confirmed Decisions Invariant:** Maintain a minimum rolling queue of at least 20 active open questions in `client-context/open-questions.md` across EVERY stage of the pipeline (Stages 0 through 9). Confirmed decisions, agreed parameters, answered items, or project recaps in `client-context/open-questions.md` are strictly prohibited; that document must contain ONLY active, pending, unanswered discovery questions.
+3. **Rolling Replenishment:** When answers arrive:
+   - Remove the answered question from `client-context/open-questions.md`.
+   - Record the answer in the respective `client-context/answers/batch-*/answers.md` file (or `client-context/asset-manifest.md`).
+   - Add a new targeted question into `client-context/open-questions.md` to keep the active queue at **>= 20 questions at all times**.
+4. **Immediate Action on Code & Specs:**
+   - **If the Next.js site is already generated (`site/`):** Immediately implement the answer in the codebase (updating components, page copy, layout system, theme tokens, metadata, or CMS seed data).
+   - **If before site generation:** Update the relevant stage specifications (`layout-system.md`, `page-specs/`, `seo-strategy.md`).
+
+---
+
+## Early Content & SEO Preparation Protocol
+
+If the client or user requests to formulate SEO keywords, search intent, and prepare production content (for blog posts, interactive tools, services, case studies) during Stage 0 before advancing through design theory:
+1. **Invoke Gate 4 Early:** Follow [gate-4-seo-strategy/runbook.md](../gate-4-seo-strategy/runbook.md).
+2. **Upfront Tool Check:** First ask if tool connections (GSC, GA4, Ahrefs, SEMrush) are available before generating content.
+3. **Modular Content Folders:** Generate complete markdown content directly into `client-context/<model>/.../content.md` matching active website models:
+   - `client-context/blog/<blog-slug>/content.md`
+   - `client-context/tool/<tool-category-slug>/<tool-slug>/content.md` (when tool model is used)
+   - `client-context/service/<service-slug>/content.md`
+4. **Co-Located Visual Assets:** Place companion images, screenshots, and icons directly in the same folder alongside `content.md`.
+5. **Pure SEO Scope:** Strictly prohibit writing Next.js code (`site/`) during this early content phase. Next.js code is handled during Stage 6 Scaffolding.
+
+---
+
+## References
+
+- [Master Client Discovery Questionnaire](client-questionnaire.md) — Master intake index and routing guide.
+- [Pipeline Stages & State Machine](pipeline-stages.md) — Master 9-stage state machine and routing rules.
+

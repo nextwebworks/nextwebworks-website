@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js build outputs & Vercel
+.next/
+out/
+build/
+dist/
+.vercel/
+.vercel
+
+# Environment files
+.env*
+!.env.example
+
+# Legacy website mirror & crawled assets
+previous-site/
+
+# Benchmark reference scrapes (keep sources.md, ignore heavy scraped mirrors)
+project-docs/design-references/*/**
+!project-docs/design-references/sources.md
+
+# Operating system / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Antigravity Hooks
+.agents/hooks/.counter
+
+

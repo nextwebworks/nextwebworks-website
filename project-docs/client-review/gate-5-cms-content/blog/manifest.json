@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-11-11T06:12:35.622Z",
+  "totalSeeds": 3,
+  "items": [
+    {
+      "slug": "headless-nextjs-vs-wordpress-vs-webflow",
+      "model": "Blog",
+      "resourceSlug": "blog",
+      "source": "client-context\\blog\\headless-nextjs-vs-wordpress-vs-webflow\\content.mdx"
+    },
+    {
+      "slug": "how-to-scope-fixed-price-web-projects-without-scope-creep",
+      "model": "Blog",
+      "resourceSlug": "blog",
+      "source": "client-context\\blog\\how-to-scope-fixed-price-web-projects-without-scope-creep\\content.mdx"
+    },
+    {
+      "slug": "the-white-label-playbook-for-marketing-agencies",
+      "model": "Blog",
+      "resourceSlug": "blog",
+      "source": "client-context\\blog\\the-white-label-playbook-for-marketing-agencies\\content.mdx"
+    }
+  ]
+}

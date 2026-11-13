@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="hybrid">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variation 3: The Hybrid Operator</title>
+  <meta name="description" content="White-Label Development Partner for Marketing Agencies. We build websites, web apps, ERPs and mobile apps under your agency's brand.">
+  
+  <!-- Client Review Metadata for Hub Parser -->
+  <span class="badge" style="display:none;">Variation 3 · Hybrid Slate &amp; Light</span>
+  <p class="lead" style="display:none;">High-impact deep slate hero and footer zones with high-readability light content sections for services, workflow, and FAQs.</p>
+
+  <!-- Tailwind CSS CDN + Fallback Core Utility Styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            darkCanvas: '#0B0F19',
+            darkSurface: '#0F172A',
+            darkBorder: '#1E293B',
+            lightCanvas: '#FFFFFF',
+            lightSurface: '#F8FAFC',
+            lightBorder: '#E2E8F0',
+            cobalt: '#2563EB',
+            emerald: '#10B981',
+            textDarkPrimary: '#F8FAFC',
+            textDarkMuted: '#94A3B8',
+            textLightPrimary: '#0F172A',
+            textLightSecondary: '#334155',
+            textLightMuted: '#64748B'
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Reset & Base System Typography (100% self-contained offline) */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: #0B0F19; color: #E2E8F0; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* Repeating Cards Normal CSS Rule (Token Optimization) */
+    .dark-card {
+      background: #0F172A;
+      border: 1px solid #1E293B;
+      border-radius: 0.75rem;
+      padding: 1.75rem;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .dark-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(37, 99, 235, 0.4);
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.15);
+    }
+    .light-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 0.75rem;
+      padding: 1.75rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .light-card:hover {
+      transform: translateY(-2px);
+      border-color: #CBD5E1;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+    }
+    .btn-cobalt {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: #2563EB;
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-cobalt:hover {
+      background-color: #1D4ED8;
+      transform: translateY(-1px);
+    }
+    .btn-secondary-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: transparent;
+      color: #F8FAFC;
+      border: 1px solid #1E293B;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .btn-secondary-dark:hover {
+      border-color: #475569;
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    .btn-secondary-light {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: #FFFFFF;
+      color: #0F172A;
+      border: 1px solid #CBD5E1;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .btn-secondary-light:hover {
+      border-color: #94A3B8;
+      background-color: #F8FAFC;
+    }
+    .badge-pill-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      background: rgba(30, 41, 59, 0.8);
+      color: #94A3B8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid #334155;
+    }
+    .badge-pill-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      background: #F1F5F9;
+      color: #475569;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid #E2E8F0;
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+    }
+    .focus-ring:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px #2563EB, 0 0 0 4px #0B0F19;
+    }
+    .drawer-content {
+      display: none;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #E2E8F0;
+    }
+    .drawer-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .sample-pane { display: none; }
+    .sample-pane.active { display: block; }
+    .faq-body { display: none; margin-top: 0.75rem; color: #94A3B8; font-size: 0.9375rem; }
+    .faq-body.active { display: block; }
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 40;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+      transition: transform 0.2s ease;
+      text-decoration: none;
+    }
+    .floating-whatsapp:hover { transform: scale(1.08); }
+    .mobile-cta-pill {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      background: #2563EB;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.625rem 1.25rem;
+      border-radius: 9999px;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    @media (max-width: 767px) {
+      .floating-whatsapp {
+        bottom: 5rem;
+        right: 1rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-darkCanvas text-textDarkMuted font-sans selection:bg-cobalt selection:text-white">
+
+  <!-- Header Navigation (Dark Zone) -->
+  <header id="header" class="sticky top-0 z-50 transition-all duration-200 border-b border-darkBorder bg-darkCanvas/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#header" class="flex items-center gap-2 text-textDarkPrimary font-extrabold text-lg tracking-tight focus-ring">
+        <span class="w-3 h-3 rounded-sm bg-cobalt inline-block"></span>
+        Next Web Works
+      </a>
+      
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-textDarkMuted">
+        <a href="#services" class="hover:text-textDarkPrimary transition-colors focus-ring">Services</a>
+        <a href="#workflow" class="hover:text-textDarkPrimary transition-colors focus-ring">Workflow</a>
+        <a href="#work" class="hover:text-textDarkPrimary transition-colors focus-ring">Work</a>
+        <a href="#for-agencies" class="hover:text-textDarkPrimary transition-colors focus-ring">For Agencies</a>
+        <a href="#about" class="hover:text-textDarkPrimary transition-colors focus-ring">About</a>
+        <a href="#faq" class="hover:text-textDarkPrimary transition-colors focus-ring">FAQ</a>
+        <a href="#contact" class="hover:text-textDarkPrimary transition-colors focus-ring">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#book-call" class="btn-cobalt text-xs sm:text-sm py-2 px-4 focus-ring">Book a 20-Min Call</a>
+        <button id="mobile-menu-btn" class="md:hidden text-textDarkMuted hover:text-textDarkPrimary p-2 focus-ring" aria-label="Toggle navigation menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="hidden md:hidden px-4 pt-2 pb-6 border-b border-darkBorder bg-darkCanvas space-y-3">
+      <a href="#services" class="block py-2 text-textDarkMuted hover:text-textDarkPrimary">Services</a>
+      <a href="#workflow" class="block py-2 text-textDarkMuted hover:text-textDarkPrimary">Workflow</a>
+      <a href="#work" class="block py-2 text-textDarkMuted hover:text-textDarkPrimary">Work</a>
+      <a href="#for-agencies" class="block py-2 text-textDarkMuted hover:text-textDarkPrimary">For Agencies</a>
+      <a href="#about" class="block py-2 text-textDarkMuted hover:text-textDarkPrimary">About</a>
+      <a href="#faq" class="block py-2 text-textDarkMuted hover:text-textDarkPrimary">FAQ</a>
+      <a href="#contact" class="block py-2 text-textDarkMuted hover:text-textDarkPrimary">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section (Dark Zone) -->
+    <section class="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden bg-darkCanvas border-b border-darkBorder">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 badge-pill-dark">
+              <span class="status-dot"></span>
+              White-Label Engineering Partner for Marketing Agencies
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-textDarkPrimary tracking-tight leading-tight">
+              Say Yes to Every Client Dev Request. Without Hiring Developers.
+            </h1>
+
+            <p class="text-base sm:text-lg text-textDarkMuted max-w-2xl leading-relaxed">
+              We build custom websites, web applications, business ERPs, and mobile apps under your agency’s brand. Dependable engineering craft with quotation in 24 hours and same-day kickoff.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a href="#book-call" class="btn-cobalt focus-ring">Book a 20-Min Call →</a>
+              <a href="#services" class="btn-secondary-dark focus-ring">Explore Services & How We Work ↓</a>
+            </div>
+
+            <div class="pt-4 flex flex-wrap items-center gap-6 text-xs text-textDarkMuted">
+              <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-emerald" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 100% White-Label</span>
+              <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-emerald" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Mutual NDA Before Review</span>
+              <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-emerald" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 14-Day Post-Launch Fix Window</span>
+            </div>
+          </div>
+
+          <!-- Hero Architecture Schematic Visual -->
+          <div class="lg:col-span-5">
+            <div class="dark-card relative overflow-hidden">
+              <div class="flex items-center justify-between pb-4 border-b border-darkBorder">
+                <span class="text-xs font-mono text-textDarkMuted uppercase tracking-wider">System Architecture Contract</span>
+                <span class="badge-pill-dark">Illustrative Schematic</span>
+              </div>
+              
+              <div class="py-6 space-y-4 font-mono text-xs">
+                <div class="p-3 rounded bg-darkCanvas border border-darkBorder flex items-center justify-between">
+                  <span class="text-textDarkMuted">01. Agency Brief & Client Specs</span>
+                  <span class="text-emerald">Validated</span>
+                </div>
+                <div class="flex justify-center text-cobalt">↓</div>
+                <div class="p-3 rounded bg-darkCanvas border border-cobalt/40 flex items-center justify-between shadow-[0_0_15px_rgba(37,99,235,0.15)]">
+                  <span class="text-textDarkPrimary font-semibold">02. Next Web Works Engine</span>
+                  <span class="badge-pill-dark text-emerald">Active Build</span>
+                </div>
+                <div class="flex justify-center text-cobalt">↓</div>
+                <div class="p-3 rounded bg-darkCanvas border border-darkBorder flex items-center justify-between">
+                  <span class="text-textDarkMuted">03. Next.js App Router + DB Layer</span>
+                  <span class="text-emerald">Staging Ready</span>
+                </div>
+                <div class="flex justify-center text-cobalt">↓</div>
+                <div class="p-3 rounded bg-darkCanvas border border-darkBorder flex items-center justify-between">
+                  <span class="text-textDarkMuted">04. Agency GitHub Repo Transfer</span>
+                  <span class="text-emerald">100% White-Label</span>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-darkBorder flex items-center justify-between text-xs text-textDarkMuted">
+                <span>Quotation in 24 hours</span>
+                <span>Same-day kickoff</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT BODY (HIGH-CONTRAST LIGHT ZONE) -->
+    <div class="bg-lightCanvas text-textLightSecondary">
+
+      <!-- Pain-Point Cards Section -->
+      <section class="py-16 border-b border-lightBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="badge-pill-light mb-3">Why Agencies Lose Dev Work</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-textLightPrimary tracking-tight">The Three Traps of Agency Development</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="light-card space-y-3">
+              <div class="text-xs font-mono text-cobalt font-bold">01 · Risk</div>
+              <h3 class="text-lg font-bold text-textLightPrimary">The Freelancer Ghost</h3>
+              <p class="text-sm text-textLightSecondary leading-relaxed">
+                Subcontracted freelancers disappear mid-sprint, miss critical client deadlines, or deliver unmaintainable spaghetti code your team cannot confidently hand over.
+              </p>
+            </div>
+
+            <div class="light-card space-y-3">
+              <div class="text-xs font-mono text-cobalt font-bold">02 · Overhead</div>
+              <h3 class="text-lg font-bold text-textLightPrimary">The Unbillable In-House Salary</h3>
+              <p class="text-sm text-textLightSecondary leading-relaxed">
+                Hiring full-time senior developers costs heavy monthly payroll overhead that erodes agency margin whenever client dev volume fluctuates during quiet cycles.
+              </p>
+            </div>
+
+            <div class="light-card space-y-3">
+              <div class="text-xs font-mono text-cobalt font-bold">03 · Technical Debt</div>
+              <h3 class="text-lg font-bold text-textLightPrimary">The Costly Code Rewrite</h3>
+              <p class="text-sm text-textLightSecondary leading-relaxed">
+                Brittle templates and rushed quick fixes break on the first client revision, forcing expensive complete rebuilds under your agency’s reputation.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <a href="#book-call" class="btn-secondary-light text-sm focus-ring">Tell us what your clients keep asking for →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4-Step White-Label Workflow -->
+      <section id="workflow" class="py-16 border-b border-lightBorder bg-lightSurface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="badge-pill-light mb-3">Operating Standard</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-textLightPrimary tracking-tight">How We Deliver Behind Your Brand</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="light-card space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="badge-pill-light text-emerald font-semibold">Step 01</span>
+                <span class="text-xs text-textLightMuted">NDA Lock</span>
+              </div>
+              <h3 class="text-base font-bold text-textLightPrimary">Scoped Brief & NDA</h3>
+              <p class="text-xs text-textLightSecondary leading-relaxed">
+                Mutual NDA signed before reviewing project briefs. Scope, technical stack, and delivery milestones confirmed in writing.
+              </p>
+            </div>
+
+            <div class="light-card space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="badge-pill-light">Step 02</span>
+                <span class="text-xs text-textLightMuted">24h SLA</span>
+              </div>
+              <h3 class="text-base font-bold text-textLightPrimary">Quotation in 24 Hours</h3>
+              <p class="text-xs text-textLightSecondary leading-relaxed">
+                Fixed-scope proposal delivered in 24 hours. Kickoff occurs same day once approved. Small-task turnaround: typical.
+              </p>
+            </div>
+
+            <div class="light-card space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="badge-pill-light">Step 03</span>
+                <span class="text-xs text-textLightMuted">Staging</span>
+              </div>
+              <h3 class="text-base font-bold text-textLightPrimary">Engineering & Preview</h3>
+              <p class="text-xs text-textLightSecondary leading-relaxed">
+                Clean typed codebases with staging preview environments hosted on the agency’s domain or neutral cloud deployment.
+              </p>
+            </div>
+
+            <div class="light-card space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="badge-pill-light">Step 04</span>
+                <span class="text-xs text-textLightMuted">14-Day Warranty</span>
+              </div>
+              <h3 class="text-base font-bold text-textLightPrimary">White-Label Handover</h3>
+              <p class="text-xs text-textLightSecondary leading-relaxed">
+                Private GitHub repository ownership transferred to your organization. Zero NWW watermarks, with 14-day post-launch fix window included.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <a href="#book-call" class="btn-secondary-light text-sm focus-ring">Start with a scoped pilot →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="py-16 border-b border-lightBorder bg-lightCanvas">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="badge-pill-light mb-3">Service Catalog</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-textLightPrimary tracking-tight">What We Build For Your Agency</h2>
+            <p class="text-sm text-textLightMuted mt-2">Every service includes private staging, clean documentation, and 14-day warranty.</p>
+          </div>
+
+          <!-- 2x2 Services Grid with Expandable Specification Drawers -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Card 1: Websites -->
+            <div class="light-card" id="websites">
+              <div class="flex items-center justify-between mb-3">
+                <span class="badge-pill-light">Websites & Marketing</span>
+                <span class="text-xs text-textLightMuted">Next.js · WordPress · Webflow</span>
+              </div>
+              <h3 class="text-xl font-bold text-textLightPrimary mb-2">Websites & Marketing Platforms</h3>
+              <p class="text-sm text-textLightSecondary mb-4">
+                High-performance responsive marketing websites, headless CMS builds, and custom WordPress/Webflow setups that agency clients cannot break.
+              </p>
+              <button class="drawer-toggle text-xs font-semibold text-cobalt flex items-center gap-1 focus-ring" data-target="drawer-1">
+                <span>View Technical Specs ↓</span>
+              </button>
+              <div id="drawer-1" class="drawer-content space-y-3 text-xs text-textLightSecondary">
+                <ul class="space-y-1.5 list-disc list-inside">
+                  <li>Responsive layout tested across desktop, tablet, and mobile (CLS = 0)</li>
+                  <li>On-page SEO foundation: semantic OpenGraph, dynamic sitemap.xml, robots.txt</li>
+                  <li>Lead capture forms with invisible honeypot anti-spam and email alerts</li>
+                  <li>Performance budget enforcement: Core Web Vitals optimized (LCP &lt; 2.5s)</li>
+                  <li>Agency-branded handover documentation and clean repository transfer</li>
+                </ul>
+                <div class="pt-2 flex items-center justify-between border-t border-lightBorder">
+                  <span class="text-textLightMuted italic">Scoped and quoted on your first call</span>
+                  <a href="#book-call" class="text-cobalt font-semibold hover:underline">Discuss this build →</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Web Apps -->
+            <div class="light-card" id="web-apps">
+              <div class="flex items-center justify-between mb-3">
+                <span class="badge-pill-light">Custom Web Apps</span>
+                <span class="text-xs text-textLightMuted">Next.js · React · Node · Postgres</span>
+              </div>
+              <h3 class="text-xl font-bold text-textLightPrimary mb-2">Custom Web Apps & Client Portals</h3>
+              <p class="text-sm text-textLightSecondary mb-4">
+                Role-based client portals, internal team dashboards, custom booking systems, and analytics reporting tools built to exact client specifications.
+              </p>
+              <button class="drawer-toggle text-xs font-semibold text-cobalt flex items-center gap-1 focus-ring" data-target="drawer-2">
+                <span>View Technical Specs ↓</span>
+              </button>
+              <div id="drawer-2" class="drawer-content space-y-3 text-xs text-textLightSecondary">
+                <ul class="space-y-1.5 list-disc list-inside">
+                  <li>React Server Components with streaming data architecture for zero TTFB lag</li>
+                  <li>Role-based access control (RBAC) with secure session handling & route guards</li>
+                  <li>PostgreSQL data modeling via Prisma or MongoDB document stores</li>
+                  <li>REST / GraphQL API integrations with secure credential handling</li>
+                  <li>Isolated staging environment for agency review prior to client presentation</li>
+                </ul>
+                <div class="pt-2 flex items-center justify-between border-t border-lightBorder">
+                  <span class="text-textLightMuted italic">Scoped and quoted on your first call</span>
+                  <a href="#book-call" class="text-cobalt font-semibold hover:underline">Discuss this build →</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Business ERPs -->
+            <div class="light-card" id="erps">
+              <div class="flex items-center justify-between mb-3">
+                <span class="badge-pill-light">Operations ERPs</span>
+                <span class="text-xs text-textLightMuted">GST Engine · FIFO Stock · RBAC</span>
+              </div>
+              <h3 class="text-xl font-bold text-textLightPrimary mb-2">Operations & Business ERPs</h3>
+              <p class="text-sm text-textLightSecondary mb-4">
+                Custom operations platforms with multi-role permissions, multi-tier GST tax engines, atomic FIFO inventory transactions, and vector PDF compilation.
+              </p>
+              <button class="drawer-toggle text-xs font-semibold text-cobalt flex items-center gap-1 focus-ring" data-target="drawer-3">
+                <span>View Technical Specs ↓</span>
+              </button>
+              <div id="drawer-3" class="drawer-content space-y-3 text-xs text-textLightSecondary">
+                <ul class="space-y-1.5 list-disc list-inside">
+                  <li>Multi-tier GST engine (CGST, SGST, IGST calculation by place of supply)</li>
+                  <li>Concurrency-safe FIFO stock lot depletion via atomic database transactions</li>
+                  <li>Automated immutable audit trail tracking all ledger modifications</li>
+                  <li>Automated invoice & report generation offloaded to vector PDF microservice</li>
+                  <li>Multi-role permissions hierarchy with granular workflow approval gates</li>
+                </ul>
+                <div class="pt-2 flex items-center justify-between border-t border-lightBorder">
+                  <span class="text-textLightMuted italic">Scoped and quoted on your first call</span>
+                  <a href="#book-call" class="text-cobalt font-semibold hover:underline">Discuss this build →</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Mobile Apps -->
+            <div class="light-card" id="mobile-apps">
+              <div class="flex items-center justify-between mb-3">
+                <span class="badge-pill-light">Mobile Engineering</span>
+                <span class="text-xs text-textLightMuted">React Native · iOS & Android</span>
+              </div>
+              <h3 class="text-xl font-bold text-textLightPrimary mb-2">Cross-Platform Mobile Apps</h3>
+              <p class="text-sm text-textLightSecondary mb-4">
+                Single shared React Native codebases for iOS and Android, complete with push notifications, camera/file uploads, API sync, and app store deployment.
+              </p>
+              <button class="drawer-toggle text-xs font-semibold text-cobalt flex items-center gap-1 focus-ring" data-target="drawer-4">
+                <span>View Technical Specs ↓</span>
+              </button>
+              <div id="drawer-4" class="drawer-content space-y-3 text-xs text-textLightSecondary">
+                <ul class="space-y-1.5 list-disc list-inside">
+                  <li>Single shared React Native codebase targeting both iOS and Android stores</li>
+                  <li>Push notifications configuration via Firebase / Apple APNs</li>
+                  <li>Device hardware integrations: camera capture, file pickers, local storage</li>
+                  <li>Secure API authentication and background state synchronization</li>
+                  <li>App Store & Google Play Console submission support and signing setup</li>
+                </ul>
+                <div class="pt-2 flex items-center justify-between border-t border-lightBorder">
+                  <span class="text-textLightMuted italic">Scoped and quoted on your first call</span>
+                  <a href="#book-call" class="text-cobalt font-semibold hover:underline">Discuss this build →</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Supported Platforms Bar -->
+          <div class="mt-8 p-6 light-card bg-lightSurface" id="cms-platforms">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div>
+                <h4 class="text-sm font-bold text-textLightPrimary">Builds in the platform your client already uses</h4>
+                <p class="text-xs text-textLightMuted">Native development or ecosystem extension without forcing migration.</p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="badge-pill-light">Next.js (Primary)</span>
+                <span class="badge-pill-light">WordPress (ACF & Gutenberg)</span>
+                <span class="badge-pill-light">Webflow</span>
+                <span class="badge-pill-light">Wix</span>
+                <span class="badge-pill-light">React.js</span>
+                <span class="badge-pill-light">MERN</span>
+                <span class="badge-pill-light">PHP</span>
+                <span class="badge-pill-light">React Native</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Illustrative Samples Section (/work) -->
+      <section id="work" class="py-16 border-b border-lightBorder bg-lightSurface/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="badge-pill-light mb-3">Illustrative Builds</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-textLightPrimary tracking-tight">Engineered for Production Rigor</h2>
+            <p class="text-sm text-textLightMuted mt-2">Architecture schematics grounded in real product capabilities. Labeled as illustrative samples, not client projects.</p>
+          </div>
+
+          <!-- Tab Switcher -->
+          <div class="flex justify-center mb-8">
+            <div class="inline-flex p-1 bg-white rounded-lg border border-lightBorder shadow-sm">
+              <button class="sample-tab px-4 py-2 text-xs font-semibold rounded-md text-textLightPrimary bg-lightSurface border border-lightBorder" data-sample="sample-1">
+                SaaS Analytics Portal
+              </button>
+              <button class="sample-tab px-4 py-2 text-xs font-semibold rounded-md text-textLightMuted hover:text-textLightPrimary" data-sample="sample-2">
+                Business & Operations ERP
+              </button>
+              <button class="sample-tab px-4 py-2 text-xs font-semibold rounded-md text-textLightMuted hover:text-textLightPrimary" data-sample="sample-3">
+                Field-Inspection Mobile App
+              </button>
+            </div>
+          </div>
+
+          <!-- Sample Panes -->
+          <div id="sample-1" class="sample-pane active light-card">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-lightBorder">
+              <div>
+                <span class="badge-pill-light mb-1">Illustrative sample · not a client project</span>
+                <h3 class="text-lg font-bold text-textLightPrimary">B2B Agency Client-Reporting Dashboard</h3>
+              </div>
+              <a href="#book-call" class="btn-secondary-light text-xs">Discuss a build like this →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
+              <div class="md:col-span-6 space-y-4 text-xs text-textLightSecondary">
+                <p>Designed for agencies managing multiple client marketing accounts who need transparent performance reporting without manual spreadsheet compilation.</p>
+                <div class="space-y-2 font-mono">
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Stack:</span>
+                    <span class="text-textLightPrimary font-semibold">Next.js App Router + Tailwind CSS</span>
+                  </div>
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Data Layer:</span>
+                    <span class="text-textLightPrimary font-semibold">PostgreSQL via Prisma ORM</span>
+                  </div>
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Export Engine:</span>
+                    <span class="text-textLightPrimary font-semibold">Server-Side Vector PDF Compiler</span>
+                  </div>
+                </div>
+              </div>
+              <div class="md:col-span-6 p-4 rounded bg-lightSurface border border-lightBorder font-mono text-xs space-y-3">
+                <div class="text-textLightMuted uppercase tracking-wider font-semibold">Architecture Flow</div>
+                <div class="p-2 bg-white rounded border border-lightBorder text-textLightSecondary">Multi-Channel Spend Aggregation (Meta, Google Ads)</div>
+                <div class="text-center text-cobalt font-bold">↓</div>
+                <div class="p-2 bg-white rounded border border-cobalt/40 text-textLightPrimary">Prisma Aggregation Cache &amp; Route Handlers</div>
+                <div class="text-center text-cobalt font-bold">↓</div>
+                <div class="p-2 bg-white rounded border border-lightBorder text-emerald font-semibold">Agency Client Portal UI (Role-Guarded)</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="sample-2" class="sample-pane light-card">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-lightBorder">
+              <div>
+                <span class="badge-pill-light mb-1">Illustrative sample · not a client project</span>
+                <h3 class="text-lg font-bold text-textLightPrimary">Operations & Multi-Location Business ERP</h3>
+              </div>
+              <a href="#book-call" class="btn-secondary-light text-xs">Discuss a build like this →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
+              <div class="md:col-span-6 space-y-4 text-xs text-textLightSecondary">
+                <p>Proprietary enterprise capabilities modeled from production business systems: multi-tier GST tax splitting, atomic inventory lot depletion, and immutable ledger logging.</p>
+                <div class="space-y-2 font-mono">
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Tax Engine:</span>
+                    <span class="text-textLightPrimary font-semibold">Multi-Tier GST (CGST/SGST vs IGST)</span>
+                  </div>
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Inventory Math:</span>
+                    <span class="text-textLightPrimary font-semibold">Concurrency-Safe FIFO Lot Depletion</span>
+                  </div>
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Microservice:</span>
+                    <span class="text-textLightPrimary font-semibold">QuestPDF C# High-Speed Vector Generator</span>
+                  </div>
+                </div>
+              </div>
+              <div class="md:col-span-6 p-4 rounded bg-lightSurface border border-lightBorder font-mono text-xs space-y-3">
+                <div class="text-textLightMuted uppercase tracking-wider font-semibold">State Consistency Flow</div>
+                <div class="p-2 bg-white rounded border border-lightBorder text-textLightSecondary">Stock Lot Ingestion (FIFO Queue)</div>
+                <div class="text-center text-cobalt font-bold">↓</div>
+                <div class="p-2 bg-white rounded border border-cobalt/40 text-textLightPrimary">Mongoose Session Atomic Depletion Transaction</div>
+                <div class="text-center text-cobalt font-bold">↓</div>
+                <div class="p-2 bg-white rounded border border-lightBorder text-emerald font-semibold">Invoice Dispatch + Audit Log Append</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="sample-3" class="sample-pane light-card">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-lightBorder">
+              <div>
+                <span class="badge-pill-light mb-1">Illustrative sample · not a client project</span>
+                <h3 class="text-lg font-bold text-textLightPrimary">Field-Inspection Mobile Application</h3>
+              </div>
+              <a href="#book-call" class="btn-secondary-light text-xs">Discuss a build like this →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6">
+              <div class="md:col-span-6 space-y-4 text-xs text-textLightSecondary">
+                <p>Cross-platform mobile application providing structured inspection checklists, on-device photo capture, and authenticated backend sync.</p>
+                <div class="space-y-2 font-mono">
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Codebase:</span>
+                    <span class="text-textLightPrimary font-semibold">Shared React Native (iOS &amp; Android)</span>
+                  </div>
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Hardware APIs:</span>
+                    <span class="text-textLightPrimary font-semibold">Camera &amp; File Picker Integration</span>
+                  </div>
+                  <div class="p-2.5 rounded bg-lightSurface border border-lightBorder flex justify-between">
+                    <span>Sync Layer:</span>
+                    <span class="text-textLightPrimary font-semibold">Authenticated REST API Layer</span>
+                  </div>
+                </div>
+              </div>
+              <div class="md:col-span-6 p-4 rounded bg-lightSurface border border-lightBorder font-mono text-xs space-y-3">
+                <div class="text-textLightMuted uppercase tracking-wider font-semibold">Device Architecture Flow</div>
+                <div class="p-2 bg-white rounded border border-lightBorder text-textLightSecondary">Inspection Checklist Form Input</div>
+                <div class="text-center text-cobalt font-bold">↓</div>
+                <div class="p-2 bg-white rounded border border-cobalt/40 text-textLightPrimary">Camera Photo Capture &amp; Compression</div>
+                <div class="text-center text-cobalt font-bold">↓</div>
+                <div class="p-2 bg-white rounded border border-lightBorder text-emerald font-semibold">Central Admin API Sync &amp; Dispatch</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Partnership Models Section (/for-agencies) -->
+      <section id="for-agencies" class="py-16 border-b border-lightBorder bg-lightCanvas">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="badge-pill-light mb-3">Partnership Models</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-textLightPrimary tracking-tight">Three Ways Agencies Work With Us</h2>
+            <p class="text-sm text-textLightMuted mt-2">Predictable project scoping lets you bundle development into your own service lines. All terms discussed directly on discovery calls.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Model 1: Pilot -->
+            <div class="light-card space-y-4">
+              <span class="badge-pill-light">Model 01</span>
+              <h3 class="text-xl font-bold text-textLightPrimary">Scoped Pilot Build</h3>
+              <p class="text-xs text-textLightSecondary leading-relaxed">
+                Test our speed, code quality, and communication on a single scoped build (landing page, widget, or component) before committing further. Limit 1 per agency.
+              </p>
+              <div class="text-xs font-mono text-emerald font-semibold">Same-Day Kickoff Available</div>
+              <a href="#book-call" class="block text-xs font-semibold text-cobalt hover:underline pt-2">Test our code with a pilot →</a>
+            </div>
+
+            <!-- Model 2: Sprints -->
+            <div class="light-card space-y-4">
+              <span class="badge-pill-light">Model 02</span>
+              <h3 class="text-xl font-bold text-textLightPrimary">Fixed-Price Sprints</h3>
+              <p class="text-xs text-textLightSecondary leading-relaxed">
+                Clear scope, milestone delivery, and fixed-price quotation in 24 hours. Client calls included in project quote. Ideal for ad-hoc client website and web app requests.
+              </p>
+              <div class="text-xs font-mono text-emerald font-semibold">Quotation in 24 Hours</div>
+              <a href="#book-call" class="block text-xs font-semibold text-cobalt hover:underline pt-2">Quote your client's project →</a>
+            </div>
+
+            <!-- Model 3: Retainer -->
+            <div class="light-card space-y-4 border-cobalt/40 relative shadow-md">
+              <div class="flex items-center justify-between">
+                <span class="badge-pill-light text-emerald font-semibold">Featured Model</span>
+                <span class="text-xs text-textLightMuted">Dedicated Capacity</span>
+              </div>
+              <h3 class="text-xl font-bold text-textLightPrimary">Dedicated Dev Bench</h3>
+              <p class="text-xs text-textLightSecondary leading-relaxed">
+                Dedicated monthly developer hours with a priority queue. Direct coordination, agency-preferred channel (WhatsApp, Slack, Teams), and weekly sync note.
+              </p>
+              <div class="text-xs font-mono text-emerald font-semibold">Priority Channel Support</div>
+              <a href="#book-call" class="block text-xs font-semibold text-cobalt hover:underline pt-2">Reserve dedicated bench hours →</a>
+            </div>
+
+          </div>
+
+          <div class="mt-8 text-center text-xs text-textLightMuted">
+            Terms, milestones, and scope discussed directly on your discovery call. Zero public pricing figures.
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="py-16 bg-lightSurface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-5 text-center lg:text-left">
+              <div class="w-32 h-32 mx-auto lg:mx-0 rounded-xl bg-white border border-lightBorder flex items-center justify-center text-textLightMuted font-mono text-xs shadow-sm">
+                [FOUNDER HEADSHOT]
+              </div>
+              <h3 class="text-lg font-bold text-textLightPrimary mt-4">Devansh</h3>
+              <p class="text-xs text-cobalt font-mono font-semibold">Founder &amp; Lead Engineer</p>
+              <p class="text-xs text-textLightMuted mt-2 font-mono">Indore, Madhya Pradesh, India</p>
+            </div>
+
+            <div class="lg:col-span-7 space-y-4">
+              <span class="badge-pill-light">Engineering Leadership</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-textLightPrimary tracking-tight">Engineering Standards: How We Build Behind Your Brand</h2>
+              <p class="text-sm text-textLightSecondary leading-relaxed">
+                [FOUNDER BIO / STORY TO PROVIDE]
+              </p>
+              <p class="text-sm text-textLightSecondary leading-relaxed">
+                We operate strictly under mutual NDA, build typed clean codebases, enforce automated tests, and provide isolated staging preview environments. When requested, we join your client calls as your inside technical lead.
+              </p>
+              <div class="pt-2">
+                <a href="#book-call" class="btn-secondary-light text-sm focus-ring">Talk to the founder →</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- END CONTENT BODY (HIGH-CONTRAST LIGHT ZONE) -->
+
+    <!-- STANDARD PAGE-BOTTOM SECTION STACK (TRANSITION BACK TO DEEP SLATE) -->
+    <div class="bg-darkCanvas text-textDarkMuted">
+
+      <!-- 1. FAQ Accordion Section -->
+      <section id="faq" class="py-16 border-t border-darkBorder bg-darkCanvas">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-10">
+            <span class="badge-pill-dark mb-3">Clarity &amp; Assurance</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-textDarkPrimary tracking-tight">Frequently Asked Questions</h2>
+          </div>
+
+          <div class="space-y-4">
+            
+            <div class="dark-card cursor-pointer faq-item">
+              <div class="flex items-center justify-between font-bold text-sm text-textDarkPrimary">
+                <span>Who owns the code?</span>
+                <span class="text-cobalt faq-icon">+</span>
+              </div>
+              <div class="faq-body">
+                You do: the repository ownership is transferred directly to your organization at final project delivery.
+              </div>
+            </div>
+
+            <div class="dark-card cursor-pointer faq-item">
+              <div class="flex items-center justify-between font-bold text-sm text-textDarkPrimary">
+                <span>Will our client find out?</span>
+                <span class="text-cobalt faq-icon">+</span>
+              </div>
+              <div class="faq-body">
+                We deliver under your brand with no NWW credits or watermarks. You can introduce us as your in-house developer. Commits appear under our developer handle unless you ask us to author them under your agency's identity.
+              </div>
+            </div>
+
+            <div class="dark-card cursor-pointer faq-item">
+              <div class="flex items-center justify-between font-bold text-sm text-textDarkPrimary">
+                <span>What if a bug appears after launch?</span>
+                <span class="text-cobalt faq-icon">+</span>
+              </div>
+              <div class="faq-body">
+                A 14-day post-launch fix window is included on all full builds, with proactive check-ins on Day 7 and Day 14, followed by an optional ongoing maintenance plan.
+              </div>
+            </div>
+
+            <div class="dark-card cursor-pointer faq-item">
+              <div class="flex items-center justify-between font-bold text-sm text-textDarkPrimary">
+                <span>Can you join client calls?</span>
+                <span class="text-cobalt faq-icon">+</span>
+              </div>
+              <div class="faq-body">
+                We can join client calls as your technical lead when you introduce us. Client-call attendance is included in fixed project quotes; on retainers it is deducted from retainer hours.
+              </div>
+            </div>
+
+            <div class="dark-card cursor-pointer faq-item">
+              <div class="flex items-center justify-between font-bold text-sm text-textDarkPrimary">
+                <span>What platforms and stacks do you support?</span>
+                <span class="text-cobalt faq-icon">+</span>
+              </div>
+              <div class="faq-body">
+                Next.js, WordPress (ACF &amp; Gutenberg), Webflow, Wix, React.js, MERN stack, PHP, and cross-platform React Native mobile applications.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Final CTA Banner -->
+      <section class="py-16 border-t border-darkBorder bg-darkCanvas">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="dark-card text-center p-8 sm:p-12 border-cobalt/40 shadow-[0_0_30px_rgba(37,99,235,0.15)] space-y-4">
+            <span class="badge-pill-dark text-emerald">Ready To Scope?</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-textDarkPrimary tracking-tight">Stop Turning Profitable Dev Work Away</h2>
+            <p class="text-sm sm:text-base text-textDarkMuted max-w-xl mx-auto">
+              Direct engineering conversation with Devansh. No sales pitch, no obligation. Quotation in 24 hours, kickoff same day.
+            </p>
+            <div class="pt-2">
+              <a href="#book-call" class="btn-cobalt text-base py-3 px-8 focus-ring">Book a 20-Min Call →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Embedded Contact Form -->
+      <section id="contact" class="py-16 border-t border-darkBorder bg-darkCanvas">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-10" id="book-call">
+            <span class="badge-pill-dark mb-3">Direct Inquiry</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-textDarkPrimary tracking-tight">Prefer to write? Send us your brief.</h2>
+            <p class="text-sm text-textDarkMuted mt-2">Tell us about your client's requirements, timeline, or current bottlenecks. Devansh replies within 24 hours.</p>
+          </div>
+
+          <div class="dark-card p-6 sm:p-8">
+            <form id="inquiry-form" class="space-y-4">
+              
+              <!-- Honeypot -->
+              <div style="display:none;" aria-hidden="true">
+                <input type="text" name="company_url" id="company_url" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="agency_name" class="block text-xs font-mono text-textDarkMuted mb-1">Agency Name *</label>
+                  <input type="text" id="agency_name" name="agency_name" required placeholder="Acme Digital" class="w-full bg-darkCanvas border border-darkBorder rounded-md px-3.5 py-2.5 text-sm text-textDarkPrimary focus-ring">
+                </div>
+
+                <div>
+                  <label for="contact_email" class="block text-xs font-mono text-textDarkMuted mb-1">Your Email *</label>
+                  <input type="email" id="contact_email" name="contact_email" required placeholder="founder@acme.com" class="w-full bg-darkCanvas border border-darkBorder rounded-md px-3.5 py-2.5 text-sm text-textDarkPrimary focus-ring">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="team_size" class="block text-xs font-mono text-textDarkMuted mb-1">Agency Team Size *</label>
+                  <select id="team_size" name="team_size" required class="w-full bg-darkCanvas border border-darkBorder rounded-md px-3.5 py-2.5 text-sm text-textDarkPrimary focus-ring">
+                    <option value="" disabled selected>Select agency size</option>
+                    <option value="1-5">1–5 people</option>
+                    <option value="6-15">6–15 people</option>
+                    <option value="16-30">16–30 people</option>
+                    <option value="30+">30+ people</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="work_type" class="block text-xs font-mono text-textDarkMuted mb-1">Type of Dev Work *</label>
+                  <select id="work_type" name="work_type" required class="w-full bg-darkCanvas border border-darkBorder rounded-md px-3.5 py-2.5 text-sm text-textDarkPrimary focus-ring">
+                    <option value="" disabled selected>Select core service</option>
+                    <option value="Websites">Websites (Next.js / WordPress / Webflow)</option>
+                    <option value="Web Apps">Custom Web Apps &amp; Portals</option>
+                    <option value="ERPs">Operations &amp; Business ERPs</option>
+                    <option value="Mobile">Cross-Platform Mobile Apps</option>
+                    <option value="Retainer">Dedicated Dev Bench Retainer</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="project_scope" class="block text-xs font-mono text-textDarkMuted mb-1">Project Scope &amp; Brief *</label>
+                <textarea id="project_scope" name="project_scope" rows="4" required placeholder="e.g. Need a Next.js client portal, 3 WordPress marketing sites, or dedicated monthly dev support" class="w-full bg-darkCanvas border border-darkBorder rounded-md px-3.5 py-2.5 text-sm text-textDarkPrimary focus-ring"></textarea>
+              </div>
+
+              <div class="flex items-start gap-2 pt-1">
+                <input type="checkbox" id="consent" name="consent" required class="mt-1 accent-cobalt">
+                <label for="consent" class="text-xs text-textDarkMuted">
+                  We'll use your details only to reply to your enquiry. <a href="#privacy" class="text-cobalt hover:underline">Privacy Policy</a>
+                </label>
+              </div>
+
+              <div class="pt-2">
+                <button type="submit" class="btn-cobalt w-full py-3 text-sm font-semibold focus-ring">
+                  Book a 20-Min Intro Call →
+                </button>
+              </div>
+
+              <div class="pt-2 flex items-center justify-center gap-4 text-xs text-textDarkMuted">
+                <span>NDA signed before review</span>
+                <span>·</span>
+                <span>Quotation in 24 hours</span>
+                <span>·</span>
+                <span>Same-day kickoff</span>
+              </div>
+            </form>
+
+            <div id="form-success" class="hidden text-center py-8 space-y-3">
+              <span class="w-10 h-10 rounded-full bg-emerald/20 text-emerald inline-flex items-center justify-center font-bold text-lg">✓</span>
+              <h3 class="text-lg font-bold text-textDarkPrimary">Inquiry Received</h3>
+              <p class="text-xs text-textDarkMuted max-w-sm mx-auto">Thank you. Devansh typically reviews briefs and replies within 24 business hours.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Global Footer with Newsletter -->
+      <footer class="border-t border-darkBorder bg-darkCanvas pt-16 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <!-- Newsletter Section -->
+          <div class="dark-card mb-12 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-1 max-w-md">
+              <h4 class="text-base font-bold text-textDarkPrimary">The White-Label Engineering Digest</h4>
+              <p class="text-xs text-textDarkMuted">
+                Practical runbooks on scoping fixed-price web apps and scaling without payroll. At most 2 articles a month.
+              </p>
+            </div>
+            <form id="newsletter-form" class="w-full md:w-auto flex flex-col sm:flex-row gap-2">
+              <input type="email" required placeholder="founder@agency.com" class="bg-darkCanvas border border-darkBorder rounded-md px-3.5 py-2 text-xs text-textDarkPrimary focus-ring w-full sm:w-64">
+              <button type="submit" class="btn-cobalt text-xs py-2 px-4 focus-ring">Subscribe</button>
+            </form>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-darkBorder text-xs">
+            <div class="space-y-2">
+              <h5 class="font-bold text-textDarkPrimary font-mono">Services</h5>
+              <ul class="space-y-1.5 text-textDarkMuted">
+                <li><a href="#websites" class="hover:text-textDarkPrimary">Websites &amp; Platforms</a></li>
+                <li><a href="#web-apps" class="hover:text-textDarkPrimary">Custom Web Apps</a></li>
+                <li><a href="#erps" class="hover:text-textDarkPrimary">Operations ERPs</a></li>
+                <li><a href="#mobile-apps" class="hover:text-textDarkPrimary">Mobile Engineering</a></li>
+              </ul>
+            </div>
+
+            <div class="space-y-2">
+              <h5 class="font-bold text-textDarkPrimary font-mono">Partnership</h5>
+              <ul class="space-y-1.5 text-textDarkMuted">
+                <li><a href="#for-agencies" class="hover:text-textDarkPrimary">For Agencies</a></li>
+                <li><a href="#for-agencies" class="hover:text-textPrimary">Dedicated Dev Bench</a></li>
+                <li><a href="#for-agencies" class="hover:text-textDarkPrimary">Scoped Pilot Build</a></li>
+                <li><a href="#work" class="hover:text-textDarkPrimary">Illustrative Samples</a></li>
+              </ul>
+            </div>
+
+            <div class="space-y-2">
+              <h5 class="font-bold text-textDarkPrimary font-mono">Company</h5>
+              <ul class="space-y-1.5 text-textDarkMuted">
+                <li><a href="#about" class="hover:text-textDarkPrimary">About Us</a></li>
+                <li><a href="#faq" class="hover:text-textDarkPrimary">Frequently Asked Questions</a></li>
+                <li><a href="#contact" class="hover:text-textDarkPrimary">Contact &amp; Briefs</a></li>
+                <li><a href="https://wa.me/917999934815" target="_blank" rel="noopener noreferrer" class="hover:text-textDarkPrimary text-emerald">WhatsApp Direct</a></li>
+              </ul>
+            </div>
+
+            <div class="space-y-2">
+              <h5 class="font-bold text-textDarkPrimary font-mono">Legal &amp; Business</h5>
+              <ul class="space-y-1.5 text-textDarkMuted">
+                <li><span class="text-textDarkMuted">Next Web Works (Sole Proprietorship)</span></li>
+                <li><span class="text-textDarkMuted">Indore, Madhya Pradesh, India</span></li>
+                <li><a href="#privacy" id="privacy" class="hover:text-textDarkPrimary">Privacy Policy</a></li>
+                <li><a href="#terms" id="terms" class="hover:text-textDarkPrimary">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-textDarkMuted gap-4">
+            <p>© 2026 Next Web Works. All rights reserved. White-label development partner for marketing agencies.</p>
+            <div class="flex items-center gap-4">
+              <a href="#header" class="hover:text-textDarkPrimary">Back to top ↑</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+  </main>
+
+  <!-- Floating Mobile CTA Pill (<768px) -->
+  <a href="#book-call" id="mobile-cta-pill" class="mobile-cta-pill focus-ring" aria-label="Book a 20-Min Call">
+    Book a 20-Min Call →
+  </a>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/917999934815" id="floating-whatsapp" target="_blank" rel="noopener noreferrer" class="floating-whatsapp focus-ring" aria-label="Chat with Next Web Works on WhatsApp">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>
+
+  <!-- Interactive Scripts (Drawers, Tabs, FAQ, WhatsApp Dynamic URL Builder, Mobile Menu) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1. Mobile Menu Toggle
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      if (mobileBtn && mobileDrawer) {
+        mobileBtn.addEventListener('click', () => {
+          mobileDrawer.classList.toggle('hidden');
+        });
+      }
+
+      // 2. Expandable Service Drawers
+      const drawerToggles = document.querySelectorAll('.drawer-toggle');
+      drawerToggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const drawer = document.getElementById(targetId);
+          if (drawer) {
+            const isOpen = drawer.classList.contains('active');
+            drawer.classList.toggle('active');
+            const span = btn.querySelector('span');
+            if (span) {
+              span.textContent = isOpen ? 'View Technical Specs ↓' : 'Hide Technical Specs ↑';
+            }
+          }
+        });
+      });
+
+      // 3. Illustrative Work Samples Tab Switcher
+      const sampleTabs = document.querySelectorAll('.sample-tab');
+      const samplePanes = document.querySelectorAll('.sample-pane');
+      sampleTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          sampleTabs.forEach(t => {
+            t.classList.remove('bg-lightSurface', 'text-textLightPrimary', 'border', 'border-lightBorder');
+            t.classList.add('text-textLightMuted');
+          });
+          tab.classList.add('bg-lightSurface', 'text-textLightPrimary', 'border', 'border-lightBorder');
+          tab.classList.remove('text-textLightMuted');
+
+          const targetId = tab.getAttribute('data-sample');
+          samplePanes.forEach(pane => {
+            pane.classList.remove('active');
+            if (pane.id === targetId) pane.classList.add('active');
+          });
+        });
+      });
+
+      // 4. FAQ Accordions
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const body = item.querySelector('.faq-body');
+          const icon = item.querySelector('.faq-icon');
+          if (body) {
+            const isOpen = body.classList.contains('active');
+            body.classList.toggle('active');
+            if (icon) icon.textContent = isOpen ? '+' : '−';
+          }
+        });
+      });
+
+      // 5. Mobile Floating CTA Visibility on Scroll
+      const mobilePill = document.getElementById('mobile-cta-pill');
+      if (mobilePill) {
+        window.addEventListener('scroll', () => {
+          const scrollY = window.scrollY;
+          if (window.innerWidth < 768) {
+            if (scrollY > 500) {
+              mobilePill.style.display = 'inline-flex';
+            } else {
+              mobilePill.style.display = 'none';
+            }
+          } else {
+            mobilePill.style.display = 'none';
+          }
+        });
+      }
+
+      // 6. WhatsApp Dynamic URL Builder
+      function buildWhatsAppUrl(via) {
+        const title = document.title || window.location.pathname;
+        const urlObj = new URL(window.location.href);
+        const searchParams = new URLSearchParams(urlObj.search);
+        const cleanParams = new URLSearchParams();
+        for (const [k, v] of searchParams.entries()) {
+          if (k.startsWith('utm_')) cleanParams.set(k, v);
+        }
+        const cleanLink = urlObj.origin + urlObj.pathname + (cleanParams.toString() ? '?' + cleanParams.toString() : '');
+        
+        let source = searchParams.get('utm_source');
+        if (!source && document.referrer) {
+          try { source = new URL(document.referrer).hostname; } catch(e) { source = 'direct'; }
+        }
+        if (!source) source = 'direct';
+
+        const lines = [
+          'Hi, I run an agency and want to discuss white-label development.',
+          '',
+          'Page: ' + title,
+          'Link: ' + cleanLink,
+          'Source: ' + source,
+          'Via: ' + via
+        ];
+        return 'https://wa.me/917999934815?text=' + encodeURIComponent(lines.join('\n'));
+      }
+
+      const waFloating = document.getElementById('floating-whatsapp');
+      if (waFloating) {
+        waFloating.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.open(buildWhatsAppUrl('floating button'), '_blank');
+        });
+      }
+
+      // 7. Form Handlers (Mock UI States)
+      const form = document.getElementById('inquiry-form');
+      const formSuccess = document.getElementById('form-success');
+      if (form && formSuccess) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const honeypot = document.getElementById('company_url');
+          if (honeypot && honeypot.value) return; // Silent discard
+          form.style.display = 'none';
+          formSuccess.classList.remove('hidden');
+        });
+      }
+
+      const newsForm = document.getElementById('newsletter-form');
+      if (newsForm) {
+        newsForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const btn = newsForm.querySelector('button');
+          if (btn) {
+            btn.textContent = 'Subscribed ✓';
+            btn.style.backgroundColor = '#10B981';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

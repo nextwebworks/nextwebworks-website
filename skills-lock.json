@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "skills": {
+    "create-nextjs-website": {
+      "source": "nextwebworks/skills",
+      "sourceType": "github",
+      "skillPath": "skills/create-nextjs-website/SKILL.md",
+      "computedHash": "7b43b990e0be9d3c6427f0c6a6733b8427ff3c52db9da9041c976b90cdd4a24f"
+    },
+    "create-nww-website": {
+      "source": "nextwebworks/skills",
+      "sourceType": "github",
+      "skillPath": "skills/create-nww-website/SKILL.md",
+      "computedHash": "acc2ce3daddf8d846af279f0fc68cf97d3dc1da92c2d1e71c80a22b1200a3631"
+    },
+    "nww": {
+      "source": "nextwebworks/skills",
+      "sourceType": "github",
+      "skillPath": "skills/nww/SKILL.md",
+      "computedHash": "d29c8619a1ad34d8b583348d4447f89add49342cbb9b44e688a15bd405e24d0e"
+    }
+  }
+}

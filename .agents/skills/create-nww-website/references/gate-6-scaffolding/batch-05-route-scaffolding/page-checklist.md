@@ -1,0 +1,129 @@
+# Page Checklist & Taste QA Specification
+
+The master static QA verification checklist establishes binary pass/fail criteria across individual pages, the foundation shell, and the final production audit. It is generated during **Stage 6 (Codebase Scaffolding, Foundation Build & Landing Page Showcase)** and enforced across Stage 6, Stage 7 (Sub-Page Build Loop), and Stage 8 (Final Verification & Handover).
+
+The output is saved to `project-docs/page-checklist.md`. (Do NOT generate `theory-revisions.md`; make revisions directly to existing files in-place. If requirement notes are needed, store them in `client-requirements/`).
+
+During Stage 7 sub-page builds, per-page QA execution results are logged to `project-docs/client-review/gate-7-sub-pages/<slug>/checklist-state.md` and recorded in `site/build-log.md`. The master checklist file itself remains a clean static template.
+
+## Table of Contents
+- [Taste Verification Pass (Stage 6 Prerequisite)](#taste-verification-pass-stage-6-prerequisite)
+- [Master Checklist Structure (`project-docs/page-checklist.md`)](#master-checklist-structure-project-docspage-checklistmd)
+- [Foundation Shell Checklist](#foundation-shell-checklist)
+- [Per-Page Build Execution Logging (Stage 7)](#per-page-build-execution-logging-stage-7)
+- [Final Production Verification Pass (Stage 8)](#final-production-verification-pass-stage-8)
+
+---
+
+## Taste Verification Pass (Stage 6 Prerequisite)
+
+Before compiling the checklist in Stage 6:
+1. **Taste Skill Check:** Verify if `frontend-design` is available per [runbook.md](../../gate-2-design-theory/runbook.md) or apply built-in taste rules.
+2. **In-Place Quality Adjustments:** Cross-examine design theory and page specifications against taste standards:
+   - Identify generic defaults (warm-cream defaults, unearned fade-and-slide-up animations across multiple sections).
+   - Revise theories and specs directly in-place to ensure distinctive styling justified by client references.
+   - Do NOT create separate revision files.
+
+---
+
+## Master Checklist Structure (`project-docs/page-checklist.md`)
+
+```markdown
+# Master QA Checklist & Taste Quality Contract
+
+---
+
+## [Page Name] (`/route-slug`)
+
+- [ ] **Structure & Line Limits:** Thin page server component (`page.js`) is <= 80 lines; section components in route `_components/` are <= 250 lines; each section file opens with `// section: <id>`; no cross-route imports; no new components in `site/components/` unless reused across 2+ pages; no `'use client'` on `page.js`; `pnpm check:structure` passes.
+- [ ] **Section Count Invariant (Minimum 5 Substantive Sections Excluding Bookends):** Page renders at least **5 distinct, substantive semantic section components OTHER THAN Hero, CTA banner, FAQ, Contact Us form, and Footer**. Bookends (Hero, CTA, FAQ, Contact Us form, Footer) do not count toward this 5-section minimum. Every page must feature at least 5 rich substantive body sections (e.g. Features/Value Grid, Social Proof/Testimonials, How-It-Works/Process, Capabilities/Bento Grid, Stats/Metrics, Case Studies, Comparison Table). Pages with fewer than 5 substantive body sections fail binary QA.
+- [ ] **Zero Repeated Content & Exact Sections Invariant:** Only section types (e.g. Hero, Features, Social Proof, FAQ, CTA) may be repeated across pages. No exact section, identical card layout, or duplicate copy/headings appears on this page or repeats from another page. All copy and value arguments are 100% unique to this route. Zero copy-pasting of body sections or content blocks.
+- [ ] **High FAQ Density Invariant (if page features FAQs):** Contains a minimum of **10 to 15 comprehensive, substantive FAQs** addressing real user objections, technical architecture, support, pricing, and onboarding with rich multi-sentence depth. All FAQs are 100% unique to this page's topic (zero duplicate questions or answers from other pages).
+- [ ] **Layout Fidelity:** Section order, layout pattern, and section count match route blueprint and content specifications. Every section ID appears; no extra sections exist.
+- [ ] **Next.js Stack & Components:** Route exists and compiles without console errors. `'use client'` appears only on leaf components requiring state or GSAP animations.
+- [ ] **Design Tokens:** Exact semantic hex tokens, modular type scale, and container widths from `design-theory.md` are used; zero hardcoded hex colors or arbitrary font values; tap targets >= 44x44px.
+- [ ] **Foundation Imports:** Shared shell components (`Nav`, `Footer`, `ResponsiveImage`) and motion tokens imported from Foundation without local redefinition.
+- [ ] **Taste Review:** Exactly ONE section is designated the "bold moment" and named here: `[Section ID]`. No other section uses competing entrance animations. Zero generic AI tells present.
+- [ ] **Typography Discipline:** Maximum of 2 typefaces; body line lengths enforced between 65–75ch; body text >= 16px on mobile; no all-caps body text.
+- [ ] **Animation Discipline (GSAP + motion tokens):**
+  - [ ] No animation on layout properties (`width`, `height`, `margin`, `padding`, `top`, `left`).
+  - [ ] Animations use only `transform` and `opacity`.
+  - [ ] Animations wrapped in `useGSAP({ scope: container })` with automatic cleanup.
+  - [ ] Wrapped in `gsap.matchMedia()` respecting `prefers-reduced-motion`.
+  - [ ] No uniform scroll-triggered entrance applied to every section.
+  - [ ] Duration and easing strictly match `design-theory.md` motion tokens.
+  - [ ] Tailwind transitions and GSAP transforms do not fight on the same element.
+  - [ ] All section text present in initial server-rendered HTML (animations run post-hydration only).
+- [ ] **Copy & Placeholder Audit:**
+  - [ ] Copy matches `client-context/` content markdown verbatim (letter for letter, punctuation for punctuation).
+  - [ ] Copy imported from `site/content/<slug>.js`; zero hardcoded text strings in section components.
+  - [ ] Every unconfirmed text block carries `data-placeholder="true"`.
+  - [ ] Zero unapproved placeholders present (`[Insert X]`, `Lorem Ipsum`, `TODO`).
+- [ ] **Asset Implementation:**
+  - [ ] Every asset slot from content specifications is rendered; zero missing slots.
+  - [ ] Rendered using `ResponsiveImage.js` with WebP srcset, sizes attribute, and explicit width/height.
+  - [ ] Cumulative Layout Shift is zero (CLS = 0).
+  - [ ] LCP image has `priority={true}` (or `fetchpriority="high"`).
+  - [ ] Non-LCP images have `loading="lazy"`.
+  - [ ] All images have descriptive, non-empty alt text.
+  - [ ] Stock images (if used) carry proper provider attribution; Unsplash images include UTM parameters.
+- [ ] **SEO & Metadata:**
+  - [ ] Page exports static or dynamic `metadata` matching `seo-strategy.md` or CMS reader.
+  - [ ] Title contains target keyword and ends with brand name.
+  - [ ] Meta description <= 155 characters with CTA.
+  - [ ] Canonical URL is absolute and self-referencing.
+  - [ ] Exactly ONE `<h1>` on the page; headings follow strict H1 -> H2 -> H3 nesting.
+  - [ ] JSON-LD schema injected via `<Schema schema={...} />` (`@/components/seo/Schema`).
+  - [ ] OG image configured (1200x630).
+- [ ] **Accessibility (WCAG AA):**
+  - [ ] All text meets 4.5:1 contrast against its background (3:1 for large text).
+  - [ ] All interactive elements keyboard focusable with visible focus ring.
+  - [ ] Form inputs have associated `<label>` elements.
+  - [ ] Links have descriptive text (no "click here").
+
+---
+
+## Foundation Build Checklist (Stage 6)
+Run during Stage 6 Foundation Build:
+- [ ] Keyboard focus states visible on all interactive elements.
+- [ ] WCAG AA contrast met across all theme tokens.
+- [ ] Reduced motion respected in all global components.
+- [ ] Semantic landmarks (`<header>`, `<nav>`, `<main>`, `<footer>`) present in root layout.
+- [ ] No hardcoded hex values in code.
+- [ ] Nav/Footer copy reads from `site/content/shared/*.js`.
+- [ ] Site settings read from `site/content/site-settings.js`.
+- [ ] `site/AGENTS.md` (<=150 lines, managed blocks preserved) and 4 scoped AGENTS.md files created.
+- [ ] Check scripts (`check-structure.mjs`, `check-assets.mjs`, `make-placeholders.mjs`) created.
+- [ ] Asset optimizer executed; `site/assets-optimize.config.md` persisted.
+- [ ] `site/components/ResponsiveImage.js` implemented as native Server Component.
+- [ ] Every CMS fetch uses `cmsFetch`; no other file sets `next.tags` or `next.revalidate`.
+- [ ] Revalidation route (`site/app/api/revalidate/route.js`) responds 401 without secret, 400 for unknown resource, 200 on valid POST.
+- [ ] `SERVER_URL`, `CMS_TOKEN`, `REVALIDATE_SECRET` never leaked to client bundles.
+- [ ] `pnpm check:all` passes cleanly.
+
+---
+
+## Cross-Page Consistency Pass (Stage 8)
+Run across all built pages prior to Gate 8:
+- [ ] Recurring components (Nav, Footer, CTABanner) render identically across all pages.
+- [ ] No duplicate titles, descriptions, or `h1`s across any routes.
+- [ ] No orphan pages (every route reachable within 3 clicks).
+- [ ] All 301 redirects return 301 and point to active 200 routes.
+- [ ] Custom 404 page works cleanly.
+- [ ] Zero `.ts` / `.tsx` files and zero `tsconfig.json` exist in `site/`.
+- [ ] Production build succeeds (`pnpm build`).
+- [ ] `pnpm check:all` passes with zero errors.
+- [ ] `project-docs/structure-audit.md` generated with zero unresolved High findings.
+```
+
+---
+
+## Per-Page State Logging Protocol
+
+When building page `<slug>` in Stage 7:
+1. Copy the per-page checklist block into `project-docs/client-review/gate-7-sub-pages/<slug>/checklist-state.md`.
+2. As each check is verified, mark `- [x]`.
+3. If an item fails, fix the code immediately and record what was changed.
+4. Present `checklist-state.md` to the user at **Gate 7b (Binary QA Sign-Off)**.
+5. Append final verification summary to `site/build-log.md`.
+

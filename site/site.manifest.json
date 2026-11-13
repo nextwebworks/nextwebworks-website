@@ -1,0 +1,53 @@
+{
+  "mode": "scaffolded",
+  "sourceVariation": {
+    "id": "v1",
+    "name": "V1 Modernist Deep Slate"
+  },
+  "preLaunchGuard": {
+    "enabled": true,
+    "envVar": "NEXT_PUBLIC_PREVIEW_GUARD"
+  },
+  "pages": [
+    {
+      "slug": "home",
+      "route": "/",
+      "pageFile": "site/app/page.js",
+      "contentFile": "site/content/home.js",
+      "sections": [
+        {
+          "id": "home-s1-hero",
+          "componentFile": "site/app/_components/HeroSection.js"
+        },
+        {
+          "id": "home-s2-pain-points",
+          "componentFile": "site/app/_components/PainPointsSection.js"
+        },
+        {
+          "id": "home-s3-workflow",
+          "componentFile": "site/app/_components/WorkflowSection.js"
+        },
+        {
+          "id": "home-s4-services",
+          "componentFile": "site/app/_components/ServicesSection.js"
+        },
+        {
+          "id": "home-s5-work",
+          "componentFile": "site/app/_components/WorkShowcaseSection.js"
+        },
+        {
+          "id": "home-s6-faq",
+          "componentFile": "site/app/_components/FAQSection.js"
+        },
+        {
+          "id": "home-s7-cta-banner",
+          "componentFile": "site/app/_components/FinalCTABanner.js"
+        },
+        {
+          "id": "home-s8-contact-form",
+          "componentFile": "site/app/_components/ContactFormSection.js"
+        }
+      ]
+    }
+  ]
+}

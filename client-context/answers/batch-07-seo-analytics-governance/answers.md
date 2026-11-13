@@ -1,0 +1,63 @@
+# Batch 07 Answers: SEO, Analytics & Governance
+
+- **Primary High-Intent Keywords:**
+  - white label web development for agencies
+  - white label website development india
+  - white label react native app development
+  - outsource development for marketing agencies
+  - white label next.js development
+  - white label wordpress development
+  - white label webflow development
+  - white label custom erp development
+  - dev partner for marketing agencies
+- **Geographic Positioning & Billing Strategy:**
+  - India-first focus with domestic INR billing plus GST.
+  - Secondary global indicator line: *"Working with agencies outside India? Ask about USD billing."*
+  - Zero overseas marketing campaigns until the domestic agency foundation is established; export-of-services GST treatment verified with accountant prior to active international marketing.
+  - HTML Language Declaration: `<html lang="en-IN">`. No `hreflang` tags until distinct international pages exist.
+- **Competitive Positioning & Differentiation:**
+  - Contrast on operational practices, never on "Indian dev shops" as a generalized group.
+  - Specific practices contrasted: opaque hourly billing traps, slow communication, missing handover documentation, and untidy/unmaintainable code.
+  - Zero competitor naming. Strictly highlight what Next Web Works delivers instead (clear scoping on discovery calls, 24h quotes, typed clean code, documented handovers).
+- **Agency Lead Magnet Strategy:**
+  - Asset: *"White-Label Scoping Checklist"* (practical agency runbook for scoping client web projects without scope creep; dropped unsubstantiated "60%+ margin" claim).
+  - Launch timing: Post-launch, after first 5 discovery calls with agency founders to ensure content addresses real-world objections.
+  - Compliance & Storage: Consent checkbox and unsubscribe link (India DPDP Act 2023, CAN-SPAM, and GDPR aligned); inbound subscriber leads stored in NWW CMS.
+- **SEO Metadata & Title Formulas:**
+  - Home Page Title: `White-Label Development Partner for Agencies | Next Web Works` (<60 characters, prevents search snippet truncation)
+  - Home Page Meta Description: `We build websites, custom web apps, ERPs and mobile apps under your agency's brand. Say yes to every client dev request without hiring developers.`
+- **Structured Data (JSON-LD) Strategy:**
+  - Standard Schemas: `Organization` (Name: "Next Web Works", Legal: Sole Proprietorship, Proprietor: `[PROPRIETOR FULL LEGAL NAME - TO PROVIDE]`, URL, Founder: Devansh, Operational City: Indore, MP; `sameAs` only for real active profiles), `Service` (cataloging core capabilities), and `BlogPosting` (for dynamic CMS articles).
+  - Excluded Markup: No `WebSite` SearchAction (no search engine to describe), zero price/offer markup (no public rates), and zero review/rating markup (no fake reviews).
+- **Sitemap & Search Indexing Rules:**
+  - Included in Sitemap (`site/app/sitemap.js`): All core routes (`/`, `/services`, `/for-agencies`, `/work`, `/about`, `/book-a-call`, `/blog`, `/contact`, `/privacy`, `/terms`) plus dynamic `/blog/[slug]` routes. `lastmod` timestamps added only when genuinely updated.
+  - Excluded & Noindexed: `/book-a-call/thank-you` is strictly excluded from `sitemap.xml` and enforced with `<meta name="robots" content="noindex, nofollow" />`.
+- **Production Domain, Canonical & DNS Rules:**
+  - Production Domain: `https://nextwebworks.in` (Authoritative Nameservers: `ns1.vercel-dns.com`, `ns2.vercel-dns.com` — managed directly via Vercel DNS).
+  - Strict HTTPS enforcement.
+  - 301 permanent redirect from `www.nextwebworks.in` to apex `https://nextwebworks.in`.
+  - Canonical tag strictly set to `https://nextwebworks.in` sitewide.
+  - Social OpenGraph & Twitter Cards (1200×630px): `#0B0F19` canvas, electric cobalt accent border, Plus Jakarta Sans typography, tagline *"White-Label Development Partner for Marketing Agencies"*, zero price claims, large high-contrast typography legible at mobile/thumbnail scale.
+- **Staging & Preview Access Control:** Hosted on the agency's own domain/cloud account, or neutral project name on Vercel preview (zero "nextwebworks" in staging URL so white-label promise is preserved). Vercel preview deployments strictly enforced with `X-Robots-Tag: noindex, nofollow` to safeguard partner confidentiality.
+- **Transactional Alert Dispatch (Email-Only via Resend):**
+  - Internal alerts: sent from `alerts@nextwebworks.in` with reply-to set to lead's own email. Subject: `[Website Lead] <Agency Name> — <Dev Work Type>`.
+  - Autoresponder: sent from `contact@nextwebworks.in` to lead: *"We've received your enquiry. Devansh will reply within 24 hours."*
+  - Forms: Consent line under every form: *"We'll use your details only to reply to your enquiry. Privacy Policy"* (linked to `/privacy`).
+- **Analytics:** ga4 (Env var placeholder: NEXT_PUBLIC_GA_ID)
+- **Legal Entity & Public Address:**
+  - Business Name: Next Web Works (Sole Proprietorship)
+  - Proprietor: `[PROPRIETOR FULL LEGAL NAME - TO PROVIDE]`
+  - GSTIN: Not shown unless provided
+  - Public Business Address: Indore, Madhya Pradesh, India (city-level only in footer and structured data; jurisdiction claims omitted from marketing copy)
+  - Privacy Compliance: Digital Personal Data Protection (DPDP) Act 2023 (India) + GDPR compliance for international inquiries
+  - Official Contact Mailbox: `contact@nextwebworks.in`
+- **Languages:** en-IN / en-US
+- **Sole Approver:** Devansh
+- **Editorial Strategy:** 9 posts per page on `/blog`, pagination only once >9 posts exist; one service callout per post, no pricing language. Three launch articles:
+  1. "The White-Label Playbook: How Marketing Agencies Ship Custom Web Apps Without In-House Devs"
+  2. "How to Scope Fixed-Price Web Projects Without Scope Creep"
+  3. "Headless Next.js vs WordPress vs Webflow: How to Choose the Right Stack"
+- **Client Review Pipeline:** GitHub Pages for Gate 2 variations; Vercel (`nextwebworks-website`) for Next.js preview & production deployments
+- **Codebase Folder:** site/
+- **Default Language & PM:** javascript / pnpm
+- **Out-of-Scope Boundaries:** confirmed

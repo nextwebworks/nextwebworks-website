@@ -1,0 +1,649 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Next Web Works Concept Map & Objective Registry",
+  "version": "1.0.0",
+  "bannedPhrases": [
+    "unlock",
+    "unlocking",
+    "elevate",
+    "elevating",
+    "seamless",
+    "seamlessly",
+    "leverage",
+    "leveraging",
+    "cutting-edge",
+    "state-of-the-art",
+    "in today's fast-paced world",
+    "in today's digital landscape",
+    "game-changer",
+    "revolutionize",
+    "bespoke",
+    "tailored solutions",
+    "supercharge",
+    "empower"
+  ],
+  "glossary": {
+    "Websites & Marketing Platforms": {
+      "category": "service",
+      "allowedAliases": ["Marketing Websites", "Headless Web"],
+      "prohibitedAliases": ["broader web solutions", "static sites"]
+    },
+    "Custom Web Applications": {
+      "category": "service",
+      "allowedAliases": ["Web Apps", "Client Portals"],
+      "prohibitedAliases": ["SaaS apps", "custom platforms", "web software"]
+    },
+    "Operations & Business ERPs": {
+      "category": "service",
+      "allowedAliases": ["Business ERPs", "Operations ERP"],
+      "prohibitedAliases": ["management software", "enterprise portals"]
+    },
+    "Cross-Platform Mobile Apps": {
+      "category": "service",
+      "allowedAliases": ["Mobile Applications", "React Native Apps"],
+      "prohibitedAliases": ["native iOS apps", "mobile solutions"]
+    },
+    "Agency CMS & No-Code Platforms": {
+      "category": "service",
+      "allowedAliases": ["CMS Platforms", "Headless CMS Builds"],
+      "prohibitedAliases": ["content sites", "visual site builders"]
+    },
+    "Scoped Pilot Build": {
+      "category": "engagementModel",
+      "allowedAliases": ["Pilot Sprint", "Scoped Pilot"],
+      "prohibitedAliases": ["trial project", "sample sprint", "pilot package"]
+    },
+    "Fixed-Price Sprints": {
+      "category": "engagementModel",
+      "allowedAliases": ["Milestone Sprints", "Fixed-Scope Projects"],
+      "prohibitedAliases": ["project pricing", "sprint packages", "project work"]
+    },
+    "Dedicated Dev Bench": {
+      "category": "engagementModel",
+      "allowedAliases": ["Dedicated Bench", "Dedicated Monthly Bench"],
+      "prohibitedAliases": ["retainer hours", "monthly dev support", "dev subscription"]
+    },
+    "14-Day Post-Launch Defect Warranty": {
+      "category": "guarantee",
+      "allowedAliases": ["14-Day Defect Warranty", "14-Day Warranty"],
+      "prohibitedAliases": ["bug-free guarantee", "unlimited fixes", "free warranty"]
+    },
+    "4-Step Delivery Protocol": {
+      "category": "process",
+      "allowedAliases": ["Delivery Protocol", "4-Stage Protocol"],
+      "prohibitedAliases": ["delivery process", "workflow stages", "how we build"]
+    },
+    "Book a 30-Min Call": {
+      "category": "action",
+      "allowedAliases": ["Book a 30-Minute Call", "Book Discovery Call"],
+      "prohibitedAliases": ["schedule meeting", "get in touch", "contact us now"]
+    }
+  },
+  "concepts": [
+    {
+      "id": "concept-4-step-protocol",
+      "canonicalName": "4-Step Delivery Protocol",
+      "owningSectionId": "home-s3-workflow",
+      "owningRoute": "/",
+      "canonicalHeadings": ["From Client Brief to Clean Staging in Four Milestones", "Delivery Protocol"],
+      "keywords": [
+        "step 01 specification nda",
+        "step 02 24hour fixed quotation",
+        "step 03 private staging qa",
+        "step 04 direct git push warranty"
+      ]
+    },
+    {
+      "id": "concept-14-day-warranty",
+      "canonicalName": "14-Day Post-Launch Defect Warranty",
+      "owningSectionId": "about-s6-warranty",
+      "owningRoute": "/about",
+      "canonicalHeadings": ["14-Day Post-Launch Defect Warranty on Every Full Build", "14-Day Post-Launch Defect Warranty"],
+      "keywords": [
+        "14day postlaunch defect warranty",
+        "14 calendar days following client staging signoff",
+        "scheduled day 7 and day 14 checkins",
+        "covers code defects against approved specifications"
+      ]
+    },
+    {
+      "id": "concept-3-engagement-models",
+      "canonicalName": "3 Commercial Engagement Models",
+      "owningSectionId": "partnership-models",
+      "owningRoute": "/for-agencies",
+      "canonicalHeadings": ["Three Ways to Integrate Next Web Works Into Your Agency", "Engagement Models"],
+      "keywords": [
+        "scoped pilot build",
+        "fixedprice sprints",
+        "dedicated dev bench"
+      ]
+    },
+    {
+      "id": "concept-5-strategic-services",
+      "canonicalName": "5 Strategic Services",
+      "owningSectionId": "services-capabilities",
+      "owningRoute": "/services",
+      "canonicalHeadings": ["Engineered Across Five Strategic Platforms", "Core Platforms"],
+      "keywords": [
+        "websites marketing platforms",
+        "custom web applications",
+        "operations business erps",
+        "crossplatform mobile apps",
+        "agency cms nocode platforms"
+      ]
+    },
+    {
+      "id": "concept-handover-package",
+      "canonicalName": "Handover Package & Deliverables",
+      "owningSectionId": "services-deliverables",
+      "owningRoute": "/services",
+      "canonicalHeadings": ["What Your Agency Receives on Every Build", "Production Deliverables"],
+      "keywords": [
+        "full source code git history",
+        "automated cicd deployment scripts",
+        "comprehensive technical documentation",
+        "performance accessibility audit report"
+      ]
+    },
+    {
+      "id": "concept-white-label-confidentiality",
+      "canonicalName": "White-Label & Non-Disclosure Protocols",
+      "owningSectionId": "agency-confidentiality",
+      "owningRoute": "/for-agencies",
+      "canonicalHeadings": ["Strict Mutual NDA & White-Label Discretion", "Confidentiality Protocols"],
+      "keywords": [
+        "mutual nondisclosure agreement",
+        "zero public credits or watermarks",
+        "flexible commit attribution"
+      ]
+    },
+    {
+      "id": "concept-case-studies",
+      "canonicalName": "3 Grounded Architectural Case Studies",
+      "owningSectionId": "work-showcase-grid",
+      "owningRoute": "/work",
+      "canonicalHeadings": ["Three Production Systems Built to Reference Standards", "Production Case Studies"],
+      "keywords": [
+        "nww headless cms kit",
+        "classymenu dining platform",
+        "ceramicsales wholesale erp"
+      ]
+    },
+    {
+      "id": "concept-verification-lab",
+      "canonicalName": "Pre-Handover Verification Standards",
+      "owningSectionId": "work-verification",
+      "owningRoute": "/work",
+      "canonicalHeadings": ["Rigorous Pre-Handover Verification in Every Sprint", "Quality Verification"],
+      "keywords": [
+        "automated cicd lint security audits",
+        "physical device responsive testing",
+        "core web vitals accessibility profiling"
+      ]
+    },
+    {
+      "id": "concept-founder-story",
+      "canonicalName": "Founder Story, Identity & Location",
+      "owningSectionId": "about-s1-founder",
+      "owningRoute": "/about",
+      "canonicalHeadings": ["Engineering Craft Behind Your Agency's Brand", "Lead Engineer & Founder"],
+      "keywords": [
+        "devansh khetwani",
+        "founder lead engineer",
+        "indore madhya pradesh india"
+      ]
+    }
+  ],
+  "sections": {
+    "home-s1-hero": {
+      "objective": "Orient visitor to white-label engineering proposition and primary CTA",
+      "readerQuestion": "What does Next Web Works do, and how does it help my agency?",
+      "isBody": false
+    },
+    "home-s2-pain-points": {
+      "objective": "Qualify agency delivery friction (freelancers, payroll, code rewrites)",
+      "readerQuestion": "Why do our client web and app projects keep turning into stressful margin traps?",
+      "isBody": true
+    },
+    "home-s4-services": {
+      "objective": "Present 5 core platform capabilities at a glance with links to detail pages",
+      "readerQuestion": "What specific platforms and software systems can Next Web Works build for our clients?",
+      "isBody": true
+    },
+    "home-s3-workflow": {
+      "objective": "Explain the 4-step delivery protocol from brief to production code handover",
+      "readerQuestion": "How does an engagement work from our first conversation to final code handover?",
+      "isBody": true
+    },
+    "home-s5-work": {
+      "objective": "Present grounded architectural proof via 3 in-house platform builds",
+      "readerQuestion": "What evidence proves Next Web Works can engineer complex production systems?",
+      "isBody": true
+    },
+    "home-engineering-standards": {
+      "objective": "Detail code quality and verification benchmarks ensuring zero agency embarrassment",
+      "readerQuestion": "How do you guarantee your code won't embarrass our agency when handed over?",
+      "isBody": true
+    },
+    "home-s6-faq": {
+      "objective": "Resolve top commercial, legal, and operational partnership objections",
+      "readerQuestion": "What are the contract terms, code ownership rules, and client disclosure policies?",
+      "isBody": false
+    },
+    "home-s7-cta-banner": {
+      "objective": "Convert high-intent visitor to book a 30-minute scoping call",
+      "readerQuestion": "How do I start a conversation about our client project?",
+      "isBody": false
+    },
+    "home-s8-contact-form": {
+      "objective": "Capture written project brief from visitors who prefer text over a call",
+      "readerQuestion": "How can I send my project brief directly without scheduling a call?",
+      "isBody": false
+    },
+    "services-hero": {
+      "objective": "Orient reader to enterprise-grade web and mobile engineering capabilities",
+      "readerQuestion": "What engineering depth does Next Web Works provide across modern stacks?",
+      "isBody": false
+    },
+    "services-capabilities": {
+      "objective": "Detail technical architecture, deliverables, and integration for 5 strategic platforms",
+      "readerQuestion": "What are the detailed architectural specifications of each service line?",
+      "isBody": true
+    },
+    "services-deliverables": {
+      "objective": "Itemize the concrete handover package received on every build",
+      "readerQuestion": "What concrete code and documentation deliverables do we receive at handover?",
+      "isBody": true
+    },
+    "services-comparison": {
+      "objective": "Compare dedicated engineering partnership against freelance platforms and in-house hiring",
+      "readerQuestion": "How does working with Next Web Works compare to hiring on Upwork or adding full-time payroll?",
+      "isBody": true
+    },
+    "services-stack-matrix": {
+      "objective": "Display supported framework matrix and clarify legacy exclusions",
+      "readerQuestion": "Which specific programming languages, databases, and frameworks are fully supported?",
+      "isBody": true
+    },
+    "services-integration-standards": {
+      "objective": "Explain direct cloud configuration in agency or client infrastructure",
+      "readerQuestion": "How do you connect into our client's existing AWS, Vercel, or cloud accounts?",
+      "isBody": true
+    },
+    "services-faqs": {
+      "objective": "Answer technical platform selection and database architecture questions",
+      "readerQuestion": "How do you handle technical edge cases and stack decisions?",
+      "isBody": false
+    },
+    "services-cta": {
+      "objective": "Convert technical visitor to book an architecture review call",
+      "readerQuestion": "How do I review our client technical architecture with an engineer?",
+      "isBody": false
+    },
+    "services-contact-form": {
+      "objective": "Capture architecture brief for fixed-price quotation",
+      "readerQuestion": "Where do I send technical specs for a 24-hour feasibility review?",
+      "isBody": false
+    },
+    "agency-hero": {
+      "objective": "Orient agency founders to margin scaling and capacity expansion without payroll",
+      "readerQuestion": "How can our agency scale dev capacity and protect margins without hiring?",
+      "isBody": false
+    },
+    "partnership-models": {
+      "objective": "Detail the 3 commercial engagement structures (Pilot, Sprints, Dedicated Bench)",
+      "readerQuestion": "What are the commercial structures available for our agency to partner with you?",
+      "isBody": true
+    },
+    "agency-margins": {
+      "objective": "Explain margin protection via binding fixed quotes and zero unbillable payroll",
+      "readerQuestion": "How does partnering with Next Web Works protect our agency's profitability?",
+      "isBody": true
+    },
+    "agency-confidentiality": {
+      "objective": "Codify white-label discretion, mutual NDA, and zero client solicitation",
+      "readerQuestion": "How do you guarantee our clients will never discover you built their application?",
+      "isBody": true
+    },
+    "agency-sla": {
+      "objective": "Detail communication channels, business hours, and client meeting attendance",
+      "readerQuestion": "What are your communication channels, business hours, and client meeting policies?",
+      "isBody": true
+    },
+    "agency-risk-reversal": {
+      "objective": "Eliminate partnership risk via milestone acceptance and 14-day warranty",
+      "readerQuestion": "What happens if a project goes off track or has bugs after client delivery?",
+      "isBody": true
+    },
+    "agency-faqs": {
+      "objective": "Answer agency operational, scope change, and payment structure questions",
+      "readerQuestion": "How do scope changes and sprint payments work in practice?",
+      "isBody": false
+    },
+    "agency-cta": {
+      "objective": "Convert agency operator to schedule an onboarding call",
+      "readerQuestion": "How do we start our first agency sprint?",
+      "isBody": false
+    },
+    "agency-contact-form": {
+      "objective": "Capture agency dev brief for 24-hour quotation review",
+      "readerQuestion": "How do I submit an RFP for our agency client?",
+      "isBody": false
+    },
+    "work-hero": {
+      "objective": "Orient visitor to architectural case studies and production standards",
+      "readerQuestion": "What kind of software systems does Next Web Works build?",
+      "isBody": false
+    },
+    "work-standards": {
+      "objective": "Establish architectural principles ensuring high concurrency and maintainability",
+      "readerQuestion": "What architectural principles ensure these systems remain scalable and maintainable?",
+      "isBody": true
+    },
+    "work-showcase-grid": {
+      "objective": "Showcase 3 grounded architectural case studies from in-house platforms",
+      "readerQuestion": "What specific production platforms has your lead engineer built and deployed?",
+      "isBody": true
+    },
+    "work-verification": {
+      "objective": "Explain pre-handover verification gates, device labs, and performance audits",
+      "readerQuestion": "How do you test and verify applications before handing code over to our agency?",
+      "isBody": true
+    },
+    "work-confidentiality-notice": {
+      "objective": "Explain why agency client builds remain confidential under mutual NDA",
+      "readerQuestion": "Why don't you display your agency client projects on this portfolio page?",
+      "isBody": true
+    },
+    "work-code-sovereignty": {
+      "objective": "Detail complete repository ownership transfer and zero developer lock-in",
+      "readerQuestion": "What happens to the code after delivery? Are we locked into your services?",
+      "isBody": true
+    },
+    "work-faqs": {
+      "objective": "Answer portfolio proof, staging preview, and coding standard questions",
+      "readerQuestion": "Can we inspect code samples or staging previews before committing?",
+      "isBody": false
+    },
+    "work-cta": {
+      "objective": "Convert visitor to discuss an architectural build",
+      "readerQuestion": "How do I discuss a system like this for our client?",
+      "isBody": false
+    },
+    "work-contact-form": {
+      "objective": "Capture architectural specification for fixed quotation",
+      "readerQuestion": "Where do I submit our project architecture brief?",
+      "isBody": false
+    },
+    "about-s1-founder": {
+      "objective": "Introduce Devansh Khetwani, Indore engineering operations, and authentic background",
+      "readerQuestion": "Who is behind Next Web Works, where are you located, and what is your engineering background?",
+      "isBody": false
+    },
+    "about-s2-principles": {
+      "objective": "Codify four core engineering principles behind our partner work",
+      "readerQuestion": "What core engineering values guide how you build and deliver code?",
+      "isBody": true
+    },
+    "about-s3-mission": {
+      "objective": "State consultancy mission to eliminate technical delivery chaos for agencies",
+      "readerQuestion": "What is the broader mission and purpose of Next Web Works?",
+      "isBody": true
+    },
+    "about-s4-philosophy": {
+      "objective": "Explain architecture philosophy prioritizing typed contracts over framework hype",
+      "readerQuestion": "What is your technical philosophy regarding software architecture?",
+      "isBody": true
+    },
+    "about-s5-operations": {
+      "objective": "Detail daily engineering operations, timezone coordination, and task visibility",
+      "readerQuestion": "How do you coordinate communication across time zones and manage daily tasks?",
+      "isBody": true
+    },
+    "about-s6-warranty": {
+      "objective": "Define terms, checkpoints, and boundaries of the 14-day post-launch warranty",
+      "readerQuestion": "What are the exact terms, checkpoints, and exclusions of the 14-day warranty?",
+      "isBody": true
+    },
+    "about-faqs": {
+      "objective": "Answer founder operations, legal registration, and subcontractor questions",
+      "readerQuestion": "Where are you legally registered and do you outsource to junior devs?",
+      "isBody": false
+    },
+    "about-cta": {
+      "objective": "Convert visitor to talk directly with the lead engineer",
+      "readerQuestion": "How do I schedule a direct conversation with Devansh?",
+      "isBody": false
+    },
+    "about-contact-form": {
+      "objective": "Provide direct text channel to send Devansh an agency inquiry",
+      "readerQuestion": "How do I send a note directly to Devansh?",
+      "isBody": false
+    },
+    "book-hero": {
+      "objective": "Orient visitor to booking a 30-minute scoping call with Devansh",
+      "readerQuestion": "What is this booking page for, and who will I be speaking with?",
+      "isBody": false
+    },
+    "book-agenda": {
+      "objective": "Outline the 3-part structured agenda for the 30-minute scoping session",
+      "readerQuestion": "What will we actually cover during our 30 minutes on the call?",
+      "isBody": true
+    },
+    "book-preparation": {
+      "objective": "Provide checklist of materials to bring to the scoping session",
+      "readerQuestion": "What documents or designs should I prepare before joining the call?",
+      "isBody": true
+    },
+    "book-guarantee": {
+      "objective": "Guarantee direct engineering consultation with zero sales pressure",
+      "readerQuestion": "Is this going to be an aggressive sales pitch or a genuine technical conversation?",
+      "isBody": true
+    },
+    "book-confidentiality": {
+      "objective": "Reassure visitor that scoping discussions are protected under mutual NDA",
+      "readerQuestion": "Is our client conversation covered under confidentiality?",
+      "isBody": true
+    },
+    "book-fallback-channels": {
+      "objective": "Provide direct WhatsApp and email booking fallbacks if widget is blocked",
+      "readerQuestion": "What if the calendar widget doesn't load or I need a custom meeting time?",
+      "isBody": true
+    },
+    "book-written-alternative": {
+      "objective": "Provide non-circular escape hatch for visitors preferring written brief submission",
+      "readerQuestion": "Can I submit our specifications in writing instead of scheduling a call?",
+      "isBody": false
+    },
+    "contact-hero": {
+      "objective": "Orient visitor to submitting a confidential dev brief for 24-hour quotation",
+      "readerQuestion": "Where do I submit our project requirements for a fixed quote?",
+      "isBody": false
+    },
+    "contact-expectations": {
+      "objective": "Commit to binding fixed-price quotation within 24 business hours",
+      "readerQuestion": "How quickly will you reply, and what happens after I submit my brief?",
+      "isBody": true
+    },
+    "contact-channels": {
+      "objective": "Present direct email, WhatsApp, and Calendly contact options",
+      "readerQuestion": "What channels are available to communicate with Next Web Works?",
+      "isBody": true
+    },
+    "contact-brief-checklist": {
+      "objective": "Detail key items to include in dev brief for accurate evaluation",
+      "readerQuestion": "What should I include in our message to get the fastest, most accurate quote?",
+      "isBody": true
+    },
+    "contact-security": {
+      "objective": "Reassure that brief details are stored securely under mutual NDA",
+      "readerQuestion": "How do you protect the confidentiality of our shared client brief?",
+      "isBody": true
+    },
+    "contact-sla": {
+      "objective": "State response time commitments and standard business hours (10am-7pm IST)",
+      "readerQuestion": "What are your business hours and response time commitments?",
+      "isBody": true
+    },
+    "contact-form": {
+      "objective": "Capture 5 qualifying agency fields for project quotation",
+      "readerQuestion": "Where do I enter our agency details and project requirements?",
+      "isBody": false
+    },
+    "contact-cta": {
+      "objective": "Offer live call alternative for visitors preferring immediate discussion",
+      "readerQuestion": "Can I talk to an engineer right now instead of filling out a form?",
+      "isBody": false
+    },
+    "blog-hero": {
+      "objective": "Orient reader to tactical engineering playbooks and agency guides",
+      "readerQuestion": "What technical resources are available for agency operators?",
+      "isBody": false
+    },
+    "blog-featured": {
+      "objective": "Highlight lead tactical playbook on shipping custom web apps",
+      "readerQuestion": "What is the most recommended playbook for our agency to read?",
+      "isBody": true
+    },
+    "blog-grid": {
+      "objective": "Display categorized directory of published engineering playbooks",
+      "readerQuestion": "What technical guides and playbooks are available to read?",
+      "isBody": true
+    },
+    "blog-topics": {
+      "objective": "Provide 1-click topic filtering for scoping, headless, and operations",
+      "readerQuestion": "How can I filter articles by technical topic?",
+      "isBody": true
+    },
+    "blog-newsletter": {
+      "objective": "Capture email subscribers for the bi-monthly agency engineering digest",
+      "readerQuestion": "How can I receive tactical agency engineering guides in my inbox?",
+      "isBody": true
+    },
+    "blog-editorial-standards": {
+      "objective": "State editorial principles: zero sponsored fluff, code-verified architectures",
+      "readerQuestion": "Can I trust that these articles are written from real engineering experience?",
+      "isBody": true
+    },
+    "blog-cta": {
+      "objective": "Convert playbook reader to discuss an upcoming client build",
+      "readerQuestion": "How do I discuss our client build with the engineer who wrote this guide?",
+      "isBody": false
+    },
+    "cal-embed": {
+      "objective": "Render interactive 30-minute scoping calendar embed for direct booking",
+      "readerQuestion": "How do I choose a date and time for our scoping call?",
+      "isBody": true
+    },
+    "book-cal": {
+      "objective": "Host interactive 30-minute scoping calendar scheduling container",
+      "readerQuestion": "Where do I select an open slot for our scoping session?",
+      "isBody": true
+    },
+    "service-detail-hero": {
+      "objective": "Orient reader to specific platform architecture and strategic capabilities",
+      "readerQuestion": "What technical depth does Next Web Works provide for this platform?",
+      "isBody": false
+    },
+    "service-detail-overview": {
+      "objective": "Detail technical specifications, architecture patterns, and integrations",
+      "readerQuestion": "What are the core technical capabilities and use cases for this platform?",
+      "isBody": true
+    },
+    "service-detail-specs": {
+      "objective": "Itemize database, framework, and performance specifications for this platform",
+      "readerQuestion": "What technical specifications and constraints govern this build type?",
+      "isBody": true
+    },
+    "service-detail-deliverables": {
+      "objective": "List concrete code artifacts and documentation delivered for this service",
+      "readerQuestion": "What specific code and deliverables do we receive at handover?",
+      "isBody": true
+    },
+    "service-detail-workflow": {
+      "objective": "Outline delivery milestones from brief review to production deployment",
+      "readerQuestion": "What are the sprint milestones for this platform deliverable?",
+      "isBody": true
+    },
+    "service-detail-stack": {
+      "objective": "Display supported tools, libraries, and runtime dependencies for this platform",
+      "readerQuestion": "Which specific frameworks and tools are utilized?",
+      "isBody": true
+    },
+    "work-detail-hero": {
+      "objective": "Orient visitor to specific in-house software architecture and platform context",
+      "readerQuestion": "What problem does this software architecture solve?",
+      "isBody": false
+    },
+    "work-detail-overview": {
+      "objective": "Provide architectural overview, problem statement, and solution design",
+      "readerQuestion": "How is this software system architected?",
+      "isBody": true
+    },
+    "work-detail-highlights": {
+      "objective": "Highlight core engineering achievements, concurrency handling, and performance",
+      "readerQuestion": "What technical milestones and architectural benchmarks were achieved?",
+      "isBody": true
+    },
+    "work-detail-deliverables": {
+      "objective": "Detail technical deliverables, schema designs, and API contracts",
+      "readerQuestion": "What database schemas and API contracts were implemented?",
+      "isBody": true
+    },
+    "work-detail-architecture": {
+      "objective": "Diagram system architecture, microservices, and database transaction flow",
+      "readerQuestion": "How do the frontend, microservices, and database layers interact?",
+      "isBody": true
+    },
+    "work-detail-confidentiality": {
+      "objective": "Reiterate white-label discretion and sample architecture disclaimer",
+      "readerQuestion": "Is this a public client build or proprietary in-house architecture?",
+      "isBody": true
+    },
+    "blog-article-header": {
+      "objective": "Orient reader to article title, reading time, category, and publication byline",
+      "readerQuestion": "What is this playbook about and who authored it?",
+      "isBody": false
+    },
+    "blog-article-body": {
+      "objective": "Deliver in-depth tactical engineering analysis, code snippets, and architecture guidance",
+      "readerQuestion": "What are the detailed engineering patterns and code implementations?",
+      "isBody": true
+    },
+    "blog-article-author": {
+      "objective": "Introduce author Devansh Khetwani, Founder & Lead Engineer at Next Web Works",
+      "readerQuestion": "Who wrote this article and what is their background?",
+      "isBody": false
+    },
+    "blog-article-key-takeaways": {
+      "objective": "Summarize actionable takeaways and architectural lessons from this playbook",
+      "readerQuestion": "What are the primary operational rules to remember?",
+      "isBody": true
+    },
+    "blog-article-discussion": {
+      "objective": "Invite technical discussion, brief submission, or architectural questions",
+      "readerQuestion": "How can I ask a follow-up technical question about this pattern?",
+      "isBody": false
+    },
+    "blog-article-related": {
+      "objective": "Surface related tactical playbooks in the same engineering category",
+      "readerQuestion": "What related engineering guides should I read next?",
+      "isBody": true
+    },
+    "article-toc": {
+      "objective": "Provide quick anchor navigation across article sections",
+      "readerQuestion": "How do I navigate between sections of this article?",
+      "isBody": false
+    },
+    "article-copy-button": {
+      "objective": "Enable 1-click code copying for technical snippets",
+      "readerQuestion": "How do I copy this code snippet?",
+      "isBody": false
+    },
+    "article-mermaid-diagram": {
+      "objective": "Render server-side and on-demand architecture diagrams",
+      "readerQuestion": "How is the system flow diagrammed visually?",
+      "isBody": true
+    }
+  }
+}

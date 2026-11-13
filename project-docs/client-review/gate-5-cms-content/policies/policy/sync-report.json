@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-11-11T12:08:06.061Z",
+  "mode": "live",
+  "serverUrl": "https://prod-server.nextwebworks.in",
+  "model": "policy",
+  "durationMs": 2103,
+  "stats": {
+    "total": 2,
+    "created": 2,
+    "skipped": 0,
+    "alreadyExists": 0,
+    "failed": 0
+  },
+  "results": [
+    {
+      "file": "C:\\code\\personal\\nextwebworks-website\\project-docs\\client-review\\gate-5-cms-content\\policies\\policy\\privacy.json",
+      "slug": "privacy",
+      "status": "CREATED",
+      "id": "6af45aa3a8450a8c5b764753",
+      "message": "Successfully created website-privacy-policy item (HTTP 201)",
+      "attempts": 1,
+      "endpoint": "https://prod-server.nextwebworks.in/api/website-privacy-policy/create-one"
+    },
+    {
+      "file": "C:\\code\\personal\\nextwebworks-website\\project-docs\\client-review\\gate-5-cms-content\\policies\\policy\\terms.json",
+      "slug": "terms",
+      "status": "CREATED",
+      "id": "6af45aa4a8450a8c5b764755",
+      "message": "Successfully created website-privacy-policy item (HTTP 201)",
+      "attempts": 1,
+      "endpoint": "https://prod-server.nextwebworks.in/api/website-privacy-policy/create-one"
+    }
+  ]
+}
