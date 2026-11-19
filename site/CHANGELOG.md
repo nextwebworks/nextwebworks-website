@@ -5,6 +5,13 @@ All notable changes to the Next Web Works platform will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.1] - 2026-11-19
+
+### Added
+- **Power BI Chatbot PoC Showcase & Lead Integration**:
+  - Implemented `/poc/power-bi-chatbot` landing page with verified architectural pillars, technical specs, and Demo CTA Guard.
+  - Wired enterprise pilot inquiry form directly into `submitLead` Server Action with source attribution `poc:power-bi-chatbot`.
+
 ## [0.11.0] - 2026-11-13
 
 ### Changed
