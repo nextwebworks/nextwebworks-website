@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { submitLead } from '@/app/actions/lead.js';
 
 export default function PbiInquiryForm() {
@@ -52,7 +53,7 @@ export default function PbiInquiryForm() {
       if (res.success) {
         setStatus({
           type: 'success',
-          message: res.message || 'Inquiry received! Our team will contact you within 24 hours with pilot scoping details.',
+          message: res.message || 'Request received! Our engineering team will review your report model and reply within 24 business hours.',
         });
         setFormData({
           name: '',
@@ -72,7 +73,7 @@ export default function PbiInquiryForm() {
     } catch {
       setStatus({
         type: 'error',
-        message: 'Network error submitting inquiry. Please email contact@nextwebworks.in.',
+        message: 'Network error submitting request. Please email contact@nextwebworks.in directly.',
       });
     } finally {
       setLoading(false);
@@ -80,135 +81,160 @@ export default function PbiInquiryForm() {
   };
 
   return (
-    <div id="inquiry-form" className="w-full max-w-2xl mx-auto rounded-2xl bg-slate-900/80 border border-slate-800 p-8 shadow-xl backdrop-blur-sm">
-      <div className="mb-6">
-        <h3 className="text-xl font-bold text-white mb-2">Request Enterprise Pilot Deployment</h3>
-        <p className="text-sm text-slate-400">
-          Interested in embedding AI conversational analytics in your Power BI reports? Submit your deployment requirements below.
+    <div
+      id="inquiry-form"
+      className="w-full max-w-2xl mx-auto rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] p-6 sm:p-10 shadow-xs transition-colors"
+    >
+      <div className="mb-8 space-y-2">
+        <span className="font-mono text-xs uppercase tracking-wider text-[#10B981] font-semibold">
+          Pilot Rollout
+        </span>
+        <h3 className="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+          Request a Staged Pilot Deployment
+        </h3>
+        <p className="text-sm leading-relaxed text-slate-600 dark:text-[#94A3B8]">
+          Interested in giving your leadership conversational access to Power BI reports? Tell us about your reporting environment to discuss a scoped pilot on your test models.
         </p>
       </div>
 
       {status?.type === 'success' ? (
-        <div className="rounded-xl bg-emerald-950/60 border border-emerald-500/40 p-6 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mb-4">
+        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-6 text-center">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 mb-3">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h4 className="text-lg font-semibold text-white mb-1">Pilot Request Submitted</h4>
-          <p className="text-sm text-emerald-200/80">{status.message}</p>
+          <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white mb-1">
+            Pilot Request Submitted
+          </h4>
+          <p className="text-xs text-slate-600 dark:text-[#94A3B8] font-mono">{status.message}</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Honeypot field for bot trap */}
-          <input
-            type="text"
-            name="website_hp"
-            value={formData.website_hp}
-            onChange={handleChange}
-            className="hidden"
-            tabIndex={-1}
-            autoComplete="off"
-          />
-          <input type="hidden" name="source" value="poc:power-bi-chatbot" />
+        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+          {/* Honeypot field for bot protection */}
+          <div className="hidden" aria-hidden="true">
+            <label htmlFor="pbi_hp">Leave empty</label>
+            <input
+              type="text"
+              id="pbi_hp"
+              name="website_hp"
+              value={formData.website_hp}
+              onChange={handleChange}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
 
           {status?.type === 'error' && (
-            <div className="rounded-lg bg-red-950/60 border border-red-500/40 p-4 text-sm text-red-200">
+            <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 p-4 text-xs font-mono text-rose-700 dark:text-rose-300">
               {status.message}
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                Full Name *
+              <label htmlFor="pbi-name" className="block text-xs font-mono uppercase text-slate-700 dark:text-[#E2E8F0]">
+                Your Name <span className="text-[#2563EB]">*</span>
               </label>
               <input
                 type="text"
+                id="pbi-name"
                 name="name"
                 required
                 value={formData.name}
                 onChange={handleChange}
                 onBlur={() => handleBlur('name')}
                 placeholder="Jane Doe"
-                className={`w-full px-4 py-2.5 rounded-lg bg-slate-950/80 border text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 transition-all ${
-                  touched.name && !isValidName
-                    ? 'border-red-500/70 focus:ring-red-500/50'
-                    : 'border-slate-800 focus:border-indigo-500 focus:ring-indigo-500/30'
-                }`}
+                className="mt-2 w-full rounded-lg border border-slate-300 dark:border-[#1E293B] bg-white dark:bg-[#0B0F19] px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
               />
+              {touched.name && !isValidName && (
+                <p className="mt-1 text-xs text-rose-500">Please provide your name.</p>
+              )}
             </div>
+
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                Work Email *
+              <label htmlFor="pbi-email" className="block text-xs font-mono uppercase text-slate-700 dark:text-[#E2E8F0]">
+                Work Email <span className="text-[#2563EB]">*</span>
               </label>
               <input
                 type="email"
+                id="pbi-email"
                 name="email"
                 required
                 value={formData.email}
                 onChange={handleChange}
                 onBlur={() => handleBlur('email')}
                 placeholder="jane@company.com"
-                className={`w-full px-4 py-2.5 rounded-lg bg-slate-950/80 border text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 transition-all ${
-                  touched.email && !isValidEmail
-                    ? 'border-red-500/70 focus:ring-red-500/50'
-                    : 'border-slate-800 focus:border-indigo-500 focus:ring-indigo-500/30'
-                }`}
+                className="mt-2 w-full rounded-lg border border-slate-300 dark:border-[#1E293B] bg-white dark:bg-[#0B0F19] px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
               />
+              {touched.email && !isValidEmail && (
+                <p className="mt-1 text-xs text-rose-500">Please provide a valid work email.</p>
+              )}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label htmlFor="pbi-org" className="block text-xs font-mono uppercase text-slate-700 dark:text-[#E2E8F0]">
                 Company / Organization
               </label>
               <input
                 type="text"
+                id="pbi-org"
                 name="agencyName"
                 value={formData.agencyName}
                 onChange={handleChange}
-                placeholder="Acme Corp"
-                className="w-full px-4 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all"
+                placeholder="Acme Enterprises"
+                className="mt-2 w-full rounded-lg border border-slate-300 dark:border-[#1E293B] bg-white dark:bg-[#0B0F19] px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
               />
             </div>
+
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                Deployment Target
+              <label htmlFor="pbi-platform" className="block text-xs font-mono uppercase text-slate-700 dark:text-[#E2E8F0]">
+                Power BI Deployment Target
               </label>
               <select
+                id="pbi-platform"
                 name="scopePlatform"
                 value={formData.scopePlatform}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all"
+                className="mt-2 w-full rounded-lg border border-slate-300 dark:border-[#1E293B] bg-white dark:bg-[#0B0F19] px-4 py-3 text-sm text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
               >
-                <option value="Power BI Embedded / Custom Visuals">Power BI Embedded / Custom Visuals</option>
-                <option value="Power BI Service / Desktop Sideload">Power BI Service / Desktop Sideload</option>
-                <option value="Microsoft Fabric Semantic Models">Microsoft Fabric Semantic Models</option>
-                <option value="Custom Enterprise Visual Architecture">Custom Enterprise Visual Architecture</option>
+                <option value="Power BI Embedded / Custom Visuals">Power BI Embedded (Web Apps)</option>
+                <option value="Power BI Service / Desktop Sideload">Power BI Service (Cloud Workspaces)</option>
+                <option value="Microsoft Fabric Semantic Models">Microsoft Fabric Lakehouse / Semantic</option>
+                <option value="Custom Enterprise Visual Architecture">Custom Visual Architecture</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-              Pilot Requirements & Semantic Model Scale
+            <label htmlFor="pbi-message" className="block text-xs font-mono uppercase text-slate-700 dark:text-[#E2E8F0]">
+              Reporting Use Case &amp; Objectives
             </label>
             <textarea
+              id="pbi-message"
               name="message"
               rows={4}
               value={formData.message}
               onChange={handleChange}
-              placeholder="Tell us about your reporting use case, semantic model size, or compliance requirements..."
-              className="w-full px-4 py-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all resize-none"
+              placeholder="Tell us about the questions leadership asks most often, semantic model size, or compliance requirements..."
+              className="mt-2 w-full rounded-lg border border-slate-300 dark:border-[#1E293B] bg-white dark:bg-[#0B0F19] px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#64748B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] resize-none"
             />
+          </div>
+
+          <div className="text-xs text-slate-500 dark:text-[#64748B] leading-relaxed">
+            By submitting, you agree to receive follow-up regarding your pilot request. We operate under strict mutual NDA and never disclose client or report data. View our{' '}
+            <Link href="/privacy" className="underline hover:text-slate-900 dark:hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            .
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold text-sm hover:from-indigo-600 hover:to-cyan-600 transition-all duration-200 shadow-lg shadow-indigo-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] px-6 py-4 text-base font-semibold text-white shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
           >
             {loading ? (
               <>
@@ -216,10 +242,10 @@ export default function PbiInquiryForm() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                 </svg>
-                Submitting Pilot Request...
+                Submitting Request...
               </>
             ) : (
-              'Submit Pilot Inquiry'
+              'Request Pilot Consultation →'
             )}
           </button>
         </form>

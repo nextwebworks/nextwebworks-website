@@ -1,149 +1,420 @@
 import Link from 'next/link';
-import { buildRouteMetadata } from '@/lib/seo/index.js';
+import { buildRouteMetadata, buildLinkedGraph } from '@/lib/seo/index.js';
+import Schema from '@/components/seo/Schema.js';
+import MotionFadeIn from '@/components/motion/MotionFadeIn.js';
+import MotionStagger from '@/components/motion/MotionStagger.js';
+import MotionMagnetic from '@/components/motion/MotionMagnetic.js';
+import FAQSection from '@/app/_components/FAQSection.js';
+import FinalCTABanner from '@/app/_components/FinalCTABanner.js';
+import PbiHeroMockup from './PbiHeroMockup.js';
 import PbiInquiryForm from './PbiInquiryForm.js';
 
 export const metadata = buildRouteMetadata({
   title: 'Power BI Embedded Conversational AI Copilot | PoC Showcase',
   description:
-    'Interactive conversational analytics visual for Microsoft Power BI. Multi-turn Google Gemini tool calling, read-only DAX validation, 50-row truncation bounds, and pure SVG vector charts.',
+    'Turn static Power BI dashboards into conversational analytics workspaces. Query semantic models in plain English with verified read-only DAX queries and native vector charts.',
   path: '/poc/power-bi-chatbot',
 });
 
+const pbiFaqs = {
+  eyebrow: 'Frequently Asked Questions',
+  title: 'Everything You Need to Know About the Power BI Copilot',
+  description:
+    'Key questions on security, authentication, semantic model compatibility, and enterprise pilot deployment.',
+  items: [
+    {
+      question: 'How does the visual authenticate against our Microsoft Power BI tenant?',
+      answer:
+        'The visual uses Microsoft Entra ID (formerly Azure Active Directory) OAuth2 delegation or a secure service principal registered in your tenant. Users only access semantic models and data rows they are already authorized to view under your existing Power BI workspace permissions and Row-Level Security (RLS) rules.',
+    },
+    {
+      question: 'Can the conversational copilot modify or delete any of our report data?',
+      answer:
+        'No. Query generation is strictly read-only. Before any DAX expression is executed against your semantic model, it passes through an Abstract Syntax Tree (AST) validation parser that permits only EVALUATE and DEFINE statements. Semicolons, table mutations, DDL, and DML keywords are categorically blocked.',
+    },
+    {
+      question: 'Does our proprietary business data leave our Azure tenant or get used to train AI models?',
+      answer:
+        'No. Only semantic metadata (table names, column headers, and measure definitions) is passed to the AI engine to formulate queries. In addition, enterprise API agreements with Google Gemini and Microsoft Azure guarantee that customer prompt data is never retained, logged, or utilized for foundational model retraining.',
+    },
+    {
+      question: 'What happens if a user asks a complex question that exceeds token or memory limits?',
+      answer:
+        'Every executed query enforces an automated 50-row truncation cap at the REST API interface level. If a query produces excessive rows, the visual displays the top 50 records alongside aggregated summary indicators, protecting both report responsiveness and LLM context window limits.',
+    },
+    {
+      question: 'Can this visual be added to existing Power BI reports or does it require new ones?',
+      answer:
+        'It packages as a standard custom visual (.pbiviz) that can be imported directly into your existing Power BI Desktop reports or published into your organization’s private organizational visuals repository in the Power BI Admin Portal.',
+    },
+    {
+      question: 'Does the copilot support DirectQuery and Microsoft Fabric semantic models?',
+      answer:
+        'Yes. Because the visual executes queries through the standard Power BI REST API (executeQueries), it supports Import Mode, DirectQuery, Composite Models, and Microsoft Fabric Lakehouse semantic models with identical query safety guarantees.',
+    },
+    {
+      question: 'How does the automated DAX error recovery work?',
+      answer:
+        'If a semantic model schema has recently changed or a generated DAX query throws a syntax error, the visual triggers an automated self-correction loop. The error code and semantic fault are sent back to the reasoning engine, which repairs the DAX query in up to two automated retries without user intervention.',
+    },
+    {
+      question: 'What is included in a staged pilot deployment?',
+      answer:
+        'A staged pilot includes a 30-day trial in your designated test workspace, integration with 1–2 of your semantic models, custom visual branding, Entra ID app configuration assistance, and dedicated engineering support to tune natural language measure mappings.',
+    },
+  ],
+};
+
+const ctaBannerContent = {
+  badge: 'Enterprise PoC Deployment · Direct with Engineering',
+  title: 'Ready to evaluate conversational analytics on your Power BI models?',
+  description:
+    'Schedule a technical scoping session to review semantic model compatibility, Entra ID permissions, and pilot rollout timelines.',
+  primaryButton: {
+    text: 'Request Pilot Deployment',
+    href: '#inquiry-form',
+  },
+  footnote: 'Fixed pilot scope · Strict mutual NDA · Complete source code and visual package included',
+};
+
 export default function PowerBiChatbotPoCPage() {
+  const jsonLd = buildLinkedGraph({
+    path: '/poc/power-bi-chatbot',
+    title: 'Power BI Embedded Conversational AI Copilot | Next Web Works',
+    description: metadata.description,
+    pageType: 'WebPage',
+    breadcrumbs: [
+      { name: 'Home', url: '/' },
+      { name: 'Work', url: '/work' },
+      { name: 'Power BI Chatbot PoC', url: '/poc/power-bi-chatbot' },
+    ],
+    faqs: pbiFaqs.items,
+    includeOrgAndSite: false,
+  });
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white pt-24 pb-20">
-      {/* Background radial gradient glow */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-indigo-600/10 blur-[130px] rounded-full" />
-        <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[350px] bg-cyan-500/10 blur-[110px] rounded-full" />
-      </div>
+    <div className="bg-white dark:bg-[#0B0F19] transition-colors">
+      <Schema schema={jsonLd} />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
-        {/* Section 1: Hero Header */}
-        <section className="text-center space-y-6 pt-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-medium text-indigo-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Verified Enterprise Proof-of-Concept
+      {/* Section 1: Hero Section */}
+      <section
+        id="poc-hero"
+        className="py-16 md:py-24 border-b border-slate-200 dark:border-[#1E293B]/60 bg-white dark:bg-[#0B0F19] transition-colors"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left Column: Deliberate Value-First Anatomy */}
+            <MotionFadeIn y={24} duration={0.8} className="lg:col-span-7 space-y-6">
+              <span className="font-mono text-xs uppercase tracking-wider text-[#10B981] font-semibold">
+                Proof-of-Concept Showcase · Power BI Visual
+              </span>
+
+              <h1 className="font-heading text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl leading-tight">
+                Conversational Analytics for Microsoft Power BI
+              </h1>
+
+              <p className="text-base leading-relaxed text-slate-600 dark:text-[#94A3B8] max-w-2xl">
+                Turn complex reporting models into natural conversations. Executive teams can ask ad-hoc questions in plain English, drill into variances, and view vector charts instantly—without waiting days for BI teams to build one-off reports.
+              </p>
+
+              {/* Action CTAs */}
+              <div className="pt-2 flex flex-wrap items-center gap-4">
+                <MotionMagnetic>
+                  <Link
+                    href="#inquiry-form"
+                    className="rounded-lg bg-[#2563EB] px-6 py-3 text-xs font-semibold text-white shadow-sm hover:bg-[#1D4ED8] transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                  >
+                    Request Pilot Deployment →
+                  </Link>
+                </MotionMagnetic>
+
+                {/* Demo CTA Guard: Primary button disabled pending Gate 5 */}
+                <div className="relative group">
+                  <button
+                    type="button"
+                    disabled
+                    aria-disabled="true"
+                    className="rounded-lg border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] px-5 py-3 text-xs font-semibold text-slate-400 dark:text-[#64748B] cursor-not-allowed inline-flex items-center gap-2"
+                  >
+                    <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Launch Live Interactive Demo
+                  </button>
+                  <div className="absolute -bottom-7 left-0 whitespace-nowrap text-[10px] font-mono font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/80 border border-amber-200 dark:border-amber-800/40 px-2 py-0.5 rounded shadow-xs pointer-events-none">
+                    Live Subdomain Launching Soon — Pending Gate 5 Verification
+                  </div>
+                </div>
+              </div>
+
+              {/* Proof Pillar Badges */}
+              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] p-3.5 text-xs transition-colors hover:border-[#2563EB]/40">
+                  <span className="font-mono text-[10px] text-[#2563EB] dark:text-[#38BDF8] font-medium block">
+                    NO BI BACKLOGS
+                  </span>
+                  <p className="mt-1 font-semibold text-slate-900 dark:text-white">Instant Answers</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] p-3.5 text-xs transition-colors hover:border-[#2563EB]/40">
+                  <span className="font-mono text-[10px] text-[#2563EB] dark:text-[#38BDF8] font-medium block">
+                    NATIVE EMBED
+                  </span>
+                  <p className="mt-1 font-semibold text-slate-900 dark:text-white">Custom Visual (.pbiviz)</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] p-3.5 text-xs transition-colors hover:border-[#2563EB]/40">
+                  <span className="font-mono text-[10px] text-[#2563EB] dark:text-[#38BDF8] font-medium block">
+                    DATA SAFETY
+                  </span>
+                  <p className="mt-1 font-semibold text-slate-900 dark:text-white">Read-Only DAX AST</p>
+                </div>
+                <div className="rounded-xl border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] p-3.5 text-xs transition-colors hover:border-[#2563EB]/40">
+                  <span className="font-mono text-[10px] text-[#2563EB] dark:text-[#38BDF8] font-medium block">
+                    AZURE SECURITY
+                  </span>
+                  <p className="mt-1 font-semibold text-slate-900 dark:text-white">Entra ID OAuth2</p>
+                </div>
+              </div>
+            </MotionFadeIn>
+
+            {/* Right Column: Interactive Power BI Visual UI Mockup */}
+            <div className="lg:col-span-5">
+              <PbiHeroMockup />
+            </div>
           </div>
+        </div>
+      </section>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight">
-            Conversational Analytics for{' '}
-            <span className="bg-gradient-to-r from-indigo-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">
-              Microsoft Power BI
+      {/* Section 2: Business Outcomes & Value */}
+      <section
+        id="business-value"
+        className="py-16 md:py-24 border-b border-slate-200 dark:border-[#1E293B]/60 bg-slate-50 dark:bg-[#0B0F19] transition-colors"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <MotionFadeIn y={15} className="max-w-2xl space-y-2">
+            <span className="font-mono text-xs uppercase tracking-wider text-[#10B981] font-semibold">
+              Executive Productivity
             </span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Empower decision-makers to converse directly with their semantic models in natural language. Generates validated,
-            read-only DAX queries, enforces a strict 50-row result cap, and streams token deltas alongside native SVG charts.
-          </p>
-
-          {/* Action CTAs with Demo Guard */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            {/* Demo CTA Guard: Primary button is rendered DISABLED until Gate 5 subdomain verification */}
-            <div className="relative group">
-              <button
-                type="button"
-                disabled
-                aria-disabled="true"
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 text-slate-400 font-semibold text-sm border border-slate-700/60 cursor-not-allowed opacity-60 flex items-center justify-center gap-2"
-              >
-                <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Launch Live Interactive Demo
-              </button>
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] font-medium text-amber-400 bg-amber-950/80 border border-amber-500/30 px-2 py-0.5 rounded shadow-lg pointer-events-none">
-                Live Demo Launching Soon — Pending Gate 5 Verification
-              </div>
-            </div>
-
-            <Link
-              href="#inquiry-form"
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 text-white font-semibold text-sm shadow-lg shadow-indigo-500/25 transition-all duration-200"
-            >
-              Request Pilot Consultation
-            </Link>
-          </div>
-        </section>
-
-        {/* Section 2: Architectural Pillars */}
-        <section className="space-y-12">
-          <div className="text-center space-y-3">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Enterprise Architectural Pillars
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+              From Days of Waiting to Instant Answers
             </h2>
-            <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto">
-              Engineered with defense-in-depth security, strict token controls, and zero client-side code execution vulnerabilities.
+            <p className="text-sm sm:text-base text-slate-600 dark:text-[#94A3B8]">
+              Eliminate reporting bottlenecks so leadership can make confident, data-backed decisions during live meetings.
             </p>
-          </div>
+          </MotionFadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg">
-                1
-              </div>
-              <h3 className="text-lg font-semibold text-white">Power BI Custom Visual (`.pbiviz`)</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Packaged using Microsoft Visuals SDK. Features a 100% safe DOM architecture with strictly zero <code className="text-indigo-300">innerHTML</code>, real-time SSE stream reader, and interactive format pane configuration.
+          <MotionStagger
+            itemSelector=".value-card"
+            stagger={0.08}
+            y={20}
+            className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            <div className="value-card rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 sm:p-8 shadow-xs space-y-3 hover:-translate-y-0.5 hover:border-[#2563EB]/50 transition-all">
+              <span className="font-mono text-xs text-[#2563EB] dark:text-[#60A5FA] font-medium">
+                SELF-SERVICE INTELLIGENCE
+              </span>
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Zero Ad-Hoc Ticket Backlogs
+              </h3>
+              <p className="text-xs leading-relaxed text-slate-600 dark:text-[#94A3B8]">
+                When leadership needs a quick segment comparison or margin drill-down before a board meeting, they shouldn&apos;t have to submit a ticket to the BI team. Copilot translates natural language into verified queries in seconds.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-lg">
-                2
-              </div>
-              <h3 className="text-lg font-semibold text-white">14 Google Gemini Function Tools</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Multi-turn function calling loop over isolated metadata, query, and presentation tools. Automated DAX self-correction recovers from syntax errors in up to 2 retries.
+            <div className="value-card rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 sm:p-8 shadow-xs space-y-3 hover:-translate-y-0.5 hover:border-[#2563EB]/50 transition-all">
+              <span className="font-mono text-xs text-[#2563EB] dark:text-[#60A5FA] font-medium">
+                FRICTIONLESS ADOPTION
+              </span>
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Embedded Directly in Your Current Reports
+              </h3>
+              <p className="text-xs leading-relaxed text-slate-600 dark:text-[#94A3B8]">
+                No new dashboards to bookmark and no complex BI software for business users to learn. The conversational copilot lives directly inside your existing Power BI report canvas as a native visual.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">
-                3
-              </div>
-              <h3 className="text-lg font-semibold text-white">Strict Read-Only DAX & 50-Row Guard</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Enforces <code className="text-emerald-300">EVALUATE</code> / <code className="text-emerald-300">DEFINE</code> query parsing while forbidding semicolons and DDL/DML mutations. Every result is capped at 50 rows to protect LLM context windows.
+            <div className="value-card rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 sm:p-8 shadow-xs space-y-3 hover:-translate-y-0.5 hover:border-[#2563EB]/50 transition-all">
+              <span className="font-mono text-xs text-[#2563EB] dark:text-[#60A5FA] font-medium">
+                DATA GOVERNANCE
+              </span>
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Guaranteed Read-Only Data Safety
+              </h3>
+              <p className="text-xs leading-relaxed text-slate-600 dark:text-[#94A3B8]">
+                Corporate data security is paramount. The engine runs under strict read-only AST parsing that categorically rejects data modification statements, disallows query injection, and caps row outputs to protect report performance.
+              </p>
+            </div>
+          </MotionStagger>
+        </div>
+      </section>
+
+      {/* Section 3: Three-Step Workflow */}
+      <section
+        id="workflow"
+        className="py-16 md:py-24 border-b border-slate-200 dark:border-[#1E293B]/60 bg-white dark:bg-[#0B0F19] transition-colors"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <MotionFadeIn y={15} className="max-w-2xl space-y-2">
+            <span className="font-mono text-xs uppercase tracking-wider text-[#10B981] font-semibold">
+              Three-Step Interaction
+            </span>
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+              How Decision-Makers Converse with Reports
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-[#94A3B8]">
+              Seamless translation from executive curiosity to verified visual analytics.
+            </p>
+          </MotionFadeIn>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] p-6 sm:p-8 space-y-3">
+              <span className="font-mono text-xs text-[#2563EB] dark:text-[#60A5FA] font-semibold">
+                STEP 01
+              </span>
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Ask in Plain English
+              </h3>
+              <p className="text-xs leading-relaxed text-slate-600 dark:text-[#94A3B8]">
+                Type or speak natural questions like &quot;Show monthly gross margin variance across product lines for Q3&quot; without writing code or formulas.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] p-6 sm:p-8 space-y-3">
+              <span className="font-mono text-xs text-[#2563EB] dark:text-[#60A5FA] font-semibold">
+                STEP 02
+              </span>
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Automated DAX Validation
+              </h3>
+              <p className="text-xs leading-relaxed text-slate-600 dark:text-[#94A3B8]">
+                The reasoning engine references your model metadata to synthesize clean DAX queries, verifying syntax and enforcing read-only AST constraints.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0F172A] p-6 sm:p-8 space-y-3">
+              <span className="font-mono text-xs text-[#2563EB] dark:text-[#60A5FA] font-semibold">
+                STEP 03
+              </span>
+              <h3 className="font-heading text-lg font-bold text-slate-900 dark:text-white">
+                Instant Visual Insights
+              </h3>
+              <p className="text-xs leading-relaxed text-slate-600 dark:text-[#94A3B8]">
+                Verified results render immediately inside the visual card alongside interactive vector bar charts and summary cards ready for your slide deck.
               </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Section 3: Technical Specifications */}
-        <section className="rounded-2xl bg-slate-900/40 border border-slate-800 p-8 space-y-6">
-          <h2 className="text-xl font-bold text-white tracking-tight">Verified Engineering Specifications</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            <div>
-              <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">AI Engine</div>
-              <div className="text-sm font-semibold text-white">Google Gemini 2.5 Flash</div>
-              <div className="text-xs text-slate-400">Multi-turn tool loop</div>
+      {/* Section 4: Enterprise Security & Governance (Where technical specs belong!) */}
+      <section
+        id="security"
+        className="py-16 md:py-24 border-b border-slate-200 dark:border-[#1E293B]/60 bg-slate-50 dark:bg-[#0B0F19] transition-colors"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <MotionFadeIn y={15} className="max-w-2xl space-y-2">
+            <span className="font-mono text-xs uppercase tracking-wider text-[#10B981] font-semibold">
+              Enterprise Governance
+            </span>
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+              Engineered for Strict Corporate Compliance
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-[#94A3B8]">
+              Built to satisfy enterprise IT, information security, and tenant isolation requirements.
+            </p>
+          </MotionFadeIn>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 space-y-2">
+              <span className="font-mono text-[11px] text-[#2563EB] dark:text-[#60A5FA] font-medium block">
+                AUTHENTICATION
+              </span>
+              <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white">
+                Microsoft Entra ID OAuth2
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-[#94A3B8] leading-relaxed">
+                Inherits existing workspace permissions and Row-Level Security (RLS) rules. Users never see data they are not permitted to access.
+              </p>
             </div>
-            <div>
-              <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">PBI Integration</div>
-              <div className="text-sm font-semibold text-white">Entra ID OAuth2</div>
-              <div className="text-xs text-slate-400">executeQueries REST API</div>
+
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 space-y-2">
+              <span className="font-mono text-[11px] text-[#2563EB] dark:text-[#60A5FA] font-medium block">
+                QUERY SAFETY
+              </span>
+              <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white">
+                Read-Only AST Validation
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-[#94A3B8] leading-relaxed">
+                Permits only EVALUATE and DEFINE statements. Disallows semicolons, table drops, or DML mutations before queries are dispatched.
+              </p>
             </div>
-            <div>
-              <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Streaming</div>
-              <div className="text-sm font-semibold text-white">Server-Sent Events</div>
-              <div className="text-xs text-slate-400">Chunked token typing</div>
+
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 space-y-2">
+              <span className="font-mono text-[11px] text-[#2563EB] dark:text-[#60A5FA] font-medium block">
+                PERFORMANCE GUARD
+              </span>
+              <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white">
+                50-Row Result Bounding Cap
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-[#94A3B8] leading-relaxed">
+                Truncates query output at 50 records to prevent runaway queries, protect report frame memory, and avoid LLM context bloat.
+              </p>
             </div>
-            <div>
-              <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Automated Tests</div>
-              <div className="text-sm font-semibold text-emerald-400">125 / 125 Passed</div>
-              <div className="text-xs text-slate-400">Full monorepo suite</div>
+
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 space-y-2">
+              <span className="font-mono text-[11px] text-[#2563EB] dark:text-[#60A5FA] font-medium block">
+                DOM SECURITY
+              </span>
+              <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white">
+                Zero innerHTML Injection
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-[#94A3B8] leading-relaxed">
+                Built strictly with safe React virtual DOM elements and SVG vector rendering. Zero raw HTML parsing or client-side eval vulnerabilities.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 space-y-2">
+              <span className="font-mono text-[11px] text-[#2563EB] dark:text-[#60A5FA] font-medium block">
+                TRANSPORT PROTOCOL
+              </span>
+              <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white">
+                Server-Sent Events (SSE)
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-[#94A3B8] leading-relaxed">
+                Streams token deltas in real-time with automatic query self-healing, recovering from schema mismatches in up to two retries.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 dark:border-[#1E293B] bg-white dark:bg-[#0F172A] p-6 space-y-2">
+              <span className="font-mono text-[11px] text-[#2563EB] dark:text-[#60A5FA] font-medium block">
+                MODEL COMPATIBILITY
+              </span>
+              <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white">
+                Power BI &amp; Microsoft Fabric
+              </h4>
+              <p className="text-xs text-slate-600 dark:text-[#94A3B8] leading-relaxed">
+                Full compatibility across Import Mode, DirectQuery, Composite Models, and Microsoft Fabric Lakehouse semantic models.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Section 4: Lead Capture Inquiry Form */}
-        <section className="space-y-6">
+      {/* Section 5: High-Density Technical FAQ */}
+      <FAQSection content={pbiFaqs} />
+
+      {/* Section 6: Inbound Pilot Inquiry Form */}
+      <section
+        id="inquiry"
+        className="py-16 md:py-24 border-b border-slate-200 dark:border-[#1E293B]/60 bg-white dark:bg-[#0B0F19] transition-colors"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <PbiInquiryForm />
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* Section 7: Final CTA Banner */}
+      <FinalCTABanner content={ctaBannerContent} />
     </div>
   );
 }
